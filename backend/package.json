@@ -20,12 +20,18 @@
     "bullmq": "^5.7.0",
     "cors": "^2.8.5",
     "cross-env": "^7.0.3",
+    "cross-spawn": "^7.0.6",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "ioredis": "^5.3.2",
+    "isexe": "^2.0.0",
+    "path-key": "^3.1.1",
     "prisma": "^5.12.1",
+    "shebang-command": "^2.0.0",
+    "shebang-regex": "^3.0.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "which": "^2.0.2"
   },
   "devDependencies": {}
 }
