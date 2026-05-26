@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "type": "module",
   "scripts": {
-    "build": "tsc && prisma generate",
+    "build": "cross-env DATABASE_URL=postgresql://mock:mock@localhost:5432/mock tsc && cross-env DATABASE_URL=postgresql://mock:mock@localhost:5432/mock prisma generate",
     "start": "node dist/index.js",
     "dev": "ts-node-esm src/index.ts",
     "simulate": "ts-node-esm src/simulate_outage.ts",
@@ -19,6 +19,7 @@
     "@types/node": "^20.12.7",
     "bullmq": "^5.7.0",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "ioredis": "^5.3.2",
