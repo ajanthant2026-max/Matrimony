@@ -1,0 +1,652 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=Noto+Sans+Tamil:wght@400;500&display=swap');
+
+:root {
+  --maroon:#5C1525; --maroon-deep:#3D0D18; --maroon-mid:#7A1E30;
+  --crimson:#B82438; --crimson-light:#D63550;
+  --gold:#C0901E; --gold-light:#DBA83A; --gold-pale:#F6E8C0; --gold-faint:#FBF4E0;
+  --cream:#FAF6EE; --cream-dark:#EDE0CC; --warm-white:#FDFAF6;
+  --text-dark:#1C0A0E; --text-mid:#4A2530; --text-muted:#7A5560; --text-light:#A8838E;
+  --verified:#0B6E60; --card:#FFFFFF; --surface:#F5EDE0;
+  --sidebar-w:220px; --right-w:280px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+.root{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text-dark);min-height:600px;}
+
+/* ── SCREEN TABS ── */
+.stabs{display:flex;gap:6px;padding:10px 12px;background:var(--cream);border-bottom:1px solid rgba(92,21,37,.1);}
+.stab{padding:6px 16px;border-radius:8px;border:1px solid rgba(92,21,37,.15);background:transparent;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;color:var(--text-muted);cursor:pointer;transition:all .2s;}
+.stab.active{background:var(--maroon);border-color:var(--maroon);color:#fff;}
+
+/* ══════════════════════
+   LANDING / HOME SCREEN
+══════════════════════ */
+.landing{display:none;}
+.landing.vis{display:block;}
+
+/* ── NAV BAR ── */
+.nav{height:60px;background:var(--warm-white);border-bottom:1px solid rgba(92,21,37,.1);display:flex;align-items:center;padding:0 32px;gap:0;}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:600;color:var(--maroon-deep);letter-spacing:.02em;margin-right:40px;}
+.nav-logo span{font-family:'Noto Sans Tamil',sans-serif;font-size:11px;color:var(--gold);display:block;line-height:1;margin-top:1px;}
+.nav-links{display:flex;gap:28px;flex:1;}
+.nav-link{font-size:13px;color:var(--text-muted);cursor:pointer;padding:4px 0;border-bottom:2px solid transparent;transition:all .2s;}
+.nav-link.active{color:var(--maroon-deep);border-bottom-color:var(--gold);}
+.nav-actions{display:flex;align-items:center;gap:12px;}
+.nav-notif{width:36px;height:36px;border-radius:10px;background:var(--cream);border:1px solid rgba(92,21,37,.1);display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:16px;cursor:pointer;position:relative;}
+.nav-notif::after{content:'';position:absolute;top:7px;right:7px;width:7px;height:7px;border-radius:50%;background:var(--crimson);border:1.5px solid var(--warm-white);}
+.nav-avatar{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--maroon-mid),var(--maroon-deep));display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.85);font-size:11px;font-weight:500;cursor:pointer;border:2px solid var(--gold-pale);}
+
+/* ── HERO ── */
+.hero{background:var(--maroon-deep);padding:64px 32px 56px;display:grid;grid-template-columns:1fr 420px;gap:48px;align-items:center;}
+.hero-text{}
+.hero-eyebrow{font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-light);margin-bottom:16px;}
+.hero-h1{font-family:'Cormorant Garamond',serif;font-size:48px;font-weight:600;color:#fff;line-height:1.12;margin-bottom:16px;}
+.hero-h1 em{color:var(--gold-light);font-style:italic;}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.65);line-height:1.7;max-width:420px;margin-bottom:32px;}
+.hero-btns{display:flex;gap:12px;}
+.btn-gold{padding:13px 28px;border-radius:12px;background:var(--gold);border:none;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;color:var(--maroon-deep);cursor:pointer;letter-spacing:.01em;}
+.btn-ghost{padding:13px 28px;border-radius:12px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:400;color:rgba(255,255,255,.85);cursor:pointer;}
+.hero-trust{display:flex;align-items:center;gap:10px;margin-top:20px;}
+.hero-trust-dot{width:6px;height:6px;border-radius:50%;background:var(--gold-light);opacity:.7;}
+.hero-trust span{font-size:12px;color:rgba(255,255,255,.45);}
+
+/* hero card stack */
+.hero-cards{position:relative;height:340px;}
+.hcard{position:absolute;background:var(--card);border-radius:20px;overflow:hidden;border:1px solid rgba(92,21,37,.1);}
+.hcard-back{width:260px;height:280px;top:40px;right:0;transform:rotate(4deg);opacity:.55;}
+.hcard-mid{width:270px;height:290px;top:20px;right:20px;transform:rotate(1.5deg);opacity:.78;}
+.hcard-front{width:280px;height:300px;top:0;right:40px;transform:rotate(-1deg);}
+.hcard-img{height:160px;background:linear-gradient(135deg,#EBD8C8,#D8C0A8);display:flex;align-items:center;justify-content:center;font-size:52px;opacity:.55;position:relative;}
+.hcard-vbadge{position:absolute;top:10px;right:10px;background:rgba(255,255,255,.9);border-radius:20px;padding:3px 8px 3px 5px;display:flex;align-items:center;gap:4px;font-size:10px;font-weight:500;color:var(--verified);}
+.hcard-vdot{width:7px;height:7px;border-radius:50%;background:var(--verified);}
+.hcard-body{padding:14px 16px;}
+.hcard-name{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:var(--maroon-deep);margin-bottom:3px;}
+.hcard-meta{font-size:11px;color:var(--text-muted);margin-bottom:10px;}
+.hcard-shared{background:var(--gold-faint);border:1px solid rgba(192,144,30,.22);border-radius:8px;padding:7px 10px;}
+.hcard-st{font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:5px;}
+.hcard-tags{display:flex;gap:5px;flex-wrap:wrap;}
+.hcard-tag{font-size:10px;background:rgba(192,144,30,.13);color:var(--maroon-deep);border-radius:20px;padding:2px 8px;font-weight:500;}
+
+/* ── FEATURES STRIP ── */
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(92,21,37,.1);}
+.feat{background:var(--warm-white);padding:28px 28px;}
+.feat-icon{width:40px;height:40px;border-radius:11px;background:var(--gold-faint);border:1px solid rgba(192,144,30,.2);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:20px;margin-bottom:14px;}
+.feat-title{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:600;color:var(--maroon-deep);margin-bottom:6px;}
+.feat-desc{font-size:12px;color:var(--text-muted);line-height:1.6;}
+
+/* ══════════════════════
+   DISCOVERY SCREEN
+══════════════════════ */
+.discovery{display:none;}
+.discovery.vis{display:grid;grid-template-columns:var(--sidebar-w) 1fr var(--right-w);height:560px;}
+
+/* sidebar */
+.sidebar{background:var(--warm-white);border-right:1px solid rgba(92,21,37,.08);display:flex;flex-direction:column;overflow:hidden;}
+.sb-logo{padding:18px 20px 14px;border-bottom:1px solid rgba(92,21,37,.07);}
+.sb-logo-name{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:var(--maroon-deep);line-height:1;}
+.sb-logo-tm{font-family:'Noto Sans Tamil',sans-serif;font-size:10px;color:var(--gold);margin-top:2px;display:block;}
+.sb-nav{padding:12px 12px;flex:1;}
+.sb-item{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;cursor:pointer;color:var(--text-muted);font-size:13px;margin-bottom:2px;transition:all .15s;}
+.sb-item.active{background:rgba(92,21,37,.07);color:var(--maroon-deep);font-weight:500;}
+.sb-item i{font-size:17px;}
+.sb-pip{margin-left:auto;width:18px;height:18px;border-radius:50%;background:var(--crimson);color:#fff;font-size:9px;font-weight:600;display:flex;align-items:center;justify-content:center;}
+.sb-profile{padding:14px 16px;border-top:1px solid rgba(92,21,37,.07);display:flex;align-items:center;gap:10px;}
+.sb-av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--maroon-mid),var(--maroon-deep));display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.8);font-size:11px;font-weight:500;flex-shrink:0;}
+.sb-av-name{font-size:12px;font-weight:500;color:var(--text-dark);}
+.sb-av-status{font-size:10px;color:var(--text-muted);}
+
+/* main feed */
+.main-feed{background:var(--surface);overflow-y:auto;padding:20px;}
+.main-feed::-webkit-scrollbar{width:4px;}
+.main-feed::-webkit-scrollbar-thumb{background:rgba(92,21,37,.15);border-radius:4px;}
+
+.feed-topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;}
+.feed-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:var(--maroon-deep);}
+.feed-sub{font-size:12px;color:var(--text-muted);margin-top:1px;}
+.filter-row{display:flex;gap:7px;margin-bottom:16px;flex-wrap:wrap;}
+.fchip{padding:5px 13px;border-radius:20px;border:1px solid var(--cream-dark);font-size:11px;font-weight:500;color:var(--text-muted);cursor:pointer;background:var(--cream);}
+.fchip.active{background:var(--maroon);border-color:var(--maroon);color:#fff;}
+
+.cards-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
+
+.pcard{background:var(--card);border-radius:18px;overflow:hidden;border:1px solid rgba(92,21,37,.07);cursor:pointer;transition:border-color .2s;}
+.pcard:hover{border-color:rgba(192,144,30,.4);}
+.pcard-img{height:140px;background:linear-gradient(135deg,#EBD8C8,#D8C0A8);display:flex;align-items:center;justify-content:center;font-size:40px;opacity:.55;position:relative;}
+.pcard-img-2{background:linear-gradient(135deg,#D8E0C8,#C0CEB0);}
+.pcard-img-3{background:linear-gradient(135deg,#D8C8D8,#C0A8C8);}
+.pcard-img-4{background:linear-gradient(135deg,#C8D4D8,#A8BCC0);}
+.pcard-vb{position:absolute;top:8px;right:8px;background:rgba(255,255,255,.9);border-radius:16px;padding:2px 7px 2px 4px;display:flex;align-items:center;gap:3px;font-size:9px;font-weight:500;color:var(--verified);}
+.pcard-vdot{width:6px;height:6px;border-radius:50%;background:var(--verified);}
+.pcard-loc{position:absolute;bottom:8px;left:8px;background:rgba(28,10,14,.6);color:rgba(255,255,255,.9);border-radius:16px;padding:2px 9px;font-size:9px;}
+.pcard-body{padding:12px 14px 14px;}
+.pcard-nr{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:2px;}
+.pcard-name{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:600;color:var(--maroon-deep);}
+.pcard-age{font-size:11px;color:var(--text-muted);}
+.pcard-meta{font-size:11px;color:var(--text-muted);margin-bottom:9px;}
+.pcard-shared{background:var(--gold-faint);border:1px solid rgba(192,144,30,.2);border-radius:8px;padding:6px 9px;margin-bottom:10px;}
+.pcard-st{font-size:8px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:4px;display:flex;align-items:center;gap:4px;}
+.pcard-tags{display:flex;gap:4px;flex-wrap:wrap;}
+.pcard-tag{font-size:10px;background:rgba(192,144,30,.12);color:var(--maroon-deep);border-radius:20px;padding:2px 7px;font-weight:500;}
+.pcard-acts{display:flex;gap:7px;}
+.pcard-pass{flex:1;padding:8px;border-radius:9px;border:1px solid var(--cream-dark);background:transparent;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;color:var(--text-muted);cursor:pointer;}
+.pcard-conn{flex:2;padding:8px;border-radius:9px;border:none;background:var(--maroon);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;color:#fff;cursor:pointer;}
+
+/* right panel */
+.right-panel{background:var(--warm-white);border-left:1px solid rgba(92,21,37,.08);overflow-y:auto;padding:20px 18px;}
+.right-panel::-webkit-scrollbar{width:3px;}
+.rp-section{margin-bottom:22px;}
+.rp-title{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;display:flex;align-items:center;gap:6px;}
+.rp-title::after{content:'';flex:1;height:1px;background:rgba(192,144,30,.2);}
+
+.rp-match{display:flex;align-items:center;gap:10px;padding:10px;border-radius:12px;cursor:pointer;transition:background .15s;border:1px solid transparent;}
+.rp-match:hover{background:rgba(92,21,37,.04);border-color:rgba(192,144,30,.2);}
+.rp-av{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;opacity:.6;flex-shrink:0;}
+.rp-av-1{background:linear-gradient(135deg,#EBD8C8,#D8C0A8);}
+.rp-av-2{background:linear-gradient(135deg,#D8E0C8,#C0CEB0);}
+.rp-av-3{background:linear-gradient(135deg,#D8C8D8,#C0A8C8);}
+.rp-info{flex:1;min-width:0;}
+.rp-name{font-size:13px;font-weight:500;color:var(--text-dark);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.rp-shared{font-size:11px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.rp-pct{font-size:12px;font-weight:600;color:var(--maroon);}
+
+.rp-activity{display:flex;flex-direction:column;gap:8px;}
+.act-item{display:flex;align-items:flex-start;gap:9px;padding:9px 10px;border-radius:10px;background:var(--cream);border:1px solid rgba(92,21,37,.06);}
+.act-icon{width:28px;height:28px;border-radius:8px;background:var(--gold-faint);border:1px solid rgba(192,144,30,.15);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;margin-top:1px;}
+.act-text{font-size:11px;color:var(--text-muted);line-height:1.5;}
+.act-text strong{color:var(--text-dark);font-weight:500;}
+.act-time{font-size:10px;color:var(--text-light);margin-top:1px;}
+
+.rp-pref-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid rgba(92,21,37,.05);font-size:12px;}
+.rp-pref-row:last-child{border-bottom:none;}
+.rp-pref-label{color:var(--text-muted);}
+.rp-pref-val{color:var(--text-dark);font-weight:500;}
+
+/* ══════════════════════
+   PROFILE VIEW SCREEN
+══════════════════════ */
+.profileview{display:none;}
+.profileview.vis{display:grid;grid-template-columns:var(--sidebar-w) 1fr var(--right-w);height:560px;}
+
+.pv-main{overflow-y:auto;background:var(--surface);}
+.pv-main::-webkit-scrollbar{width:4px;}
+.pv-main::-webkit-scrollbar-thumb{background:rgba(92,21,37,.15);border-radius:4px;}
+
+.pv-hero-web{height:220px;background:linear-gradient(135deg,#EBD8C8,#D4BEB8);display:flex;align-items:flex-end;position:relative;}
+.pv-hero-av{position:absolute;top:0;left:0;right:0;bottom:0;display:flex;align-items:center;justify-content:center;font-size:72px;opacity:.45;}
+.pv-hero-strip{position:relative;z-index:1;width:100%;padding:14px 28px;background:linear-gradient(transparent,rgba(28,10,14,.55));display:flex;align-items:flex-end;justify-content:space-between;}
+.pv-vstrip-badge{display:flex;align-items:center;gap:5px;background:rgba(11,110,96,.88);border-radius:20px;padding:4px 11px;font-size:10px;font-weight:500;color:#fff;}
+.pv-vstrip-dot{width:6px;height:6px;border-radius:50%;background:#6EE7B7;}
+.pv-hero-acts{display:flex;gap:8px;}
+.pv-ha-btn{padding:7px 16px;border-radius:9px;border:none;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;cursor:pointer;}
+.pv-ha-ghost{background:rgba(255,255,255,.15);color:#fff;border:1px solid rgba(255,255,255,.3);}
+.pv-ha-primary{background:var(--maroon);color:#fff;}
+
+.pv-content{padding:28px;}
+.pv-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid rgba(92,21,37,.08);}
+.pv-name{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:600;color:var(--maroon-deep);line-height:1.1;}
+.pv-tamil{font-family:'Noto Sans Tamil',sans-serif;font-size:14px;color:var(--gold);display:block;margin-top:3px;}
+.pv-meta-line{font-size:13px;color:var(--text-muted);margin-top:6px;display:flex;align-items:center;gap:8px;}
+.pv-meta-dot{color:var(--gold);}
+.pv-compat{text-align:center;}
+.pv-ring{width:72px;height:72px;border-radius:50%;background:conic-gradient(var(--maroon) 0% 78%,rgba(92,21,37,.12) 78% 100%);display:flex;align-items:center;justify-content:center;}
+.pv-ring-in{width:54px;height:54px;border-radius:50%;background:var(--warm-white);display:flex;align-items:center;justify-content:center;flex-direction:column;}
+.pv-ring-pct{font-size:14px;font-weight:600;color:var(--maroon-deep);line-height:1;}
+.pv-ring-label{font-size:9px;color:var(--text-muted);}
+
+.pv-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;}
+.pv-sec-title{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;display:flex;align-items:center;gap:6px;}
+.pv-sec-title::after{content:'';flex:1;height:1px;background:rgba(192,144,30,.2);}
+.pv-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px;}
+.pv-tag{padding:5px 12px;border-radius:20px;background:var(--cream);border:1px solid rgba(92,21,37,.1);font-size:12px;color:var(--text-mid);}
+.pv-tag.shared{background:var(--gold-faint);border-color:rgba(192,144,30,.28);color:var(--maroon-deep);font-weight:500;}
+.pv-tag.shared::before{content:'✦ ';color:var(--gold);font-size:8px;}
+
+.pv-vals{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.pv-val-card{background:var(--cream);border-radius:10px;padding:11px 13px;border:1px solid rgba(92,21,37,.06);}
+.pv-val-label{font-size:10px;color:var(--text-muted);margin-bottom:3px;}
+.pv-val-val{font-size:12px;font-weight:500;color:var(--text-mid);}
+
+.pv-about{font-size:13px;color:var(--text-mid);line-height:1.75;grid-column:1/-1;}
+
+/* right panel profile */
+.pv-right{background:var(--warm-white);border-left:1px solid rgba(92,21,37,.08);padding:20px 18px;overflow-y:auto;}
+.pv-action-stack{display:flex;flex-direction:column;gap:9px;margin-bottom:22px;}
+.pv-btn-full{width:100%;padding:12px;border-radius:11px;border:none;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;}
+.pv-btn-primary{background:var(--maroon);color:#fff;}
+.pv-btn-secondary{background:var(--cream);border:1px solid rgba(92,21,37,.15);color:var(--text-mid);}
+
+.pv-safety{background:rgba(11,110,96,.07);border:1px solid rgba(11,110,96,.2);border-radius:12px;padding:13px 14px;margin-bottom:18px;}
+.pv-safety-title{font-size:11px;font-weight:600;color:var(--verified);margin-bottom:8px;display:flex;align-items:center;gap:6px;}
+.pv-safety-item{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--text-muted);margin-bottom:5px;}
+.pv-safety-item:last-child{margin-bottom:0;}
+.pv-safety-check{width:14px;height:14px;border-radius:50%;background:var(--verified);color:#fff;display:flex;align-items:center;justify-content:center;font-size:8px;flex-shrink:0;}
+</style>
+
+<div class="root">
+  <h2 class="sr-only">Thunai desktop web prototype — three screens: landing page, discovery feed, and profile view</h2>
+
+  <div class="stabs">
+    <button class="stab active" onclick="ws('landing',this)">Landing page</button>
+    <button class="stab" onclick="ws('discovery',this)">Discovery feed</button>
+    <button class="stab" onclick="ws('profileview',this)">Profile view</button>
+  </div>
+
+  <!-- ════════════════════════════════
+       SCREEN A — LANDING PAGE
+  ════════════════════════════════ -->
+  <div class="landing vis" id="s-landing">
+    <div class="nav">
+      <div class="nav-logo">Thunai <span>துணை · Companion</span></div>
+      <div class="nav-links">
+        <span class="nav-link active">Discover</span>
+        <span class="nav-link">How it works</span>
+        <span class="nav-link">Stories</span>
+        <span class="nav-link">Community</span>
+      </div>
+      <div class="nav-actions">
+        <div class="nav-notif" aria-label="Notifications"><i class="ti ti-bell" aria-hidden="true"></i></div>
+        <div class="nav-avatar" aria-label="My profile">RK</div>
+      </div>
+    </div>
+
+    <div class="hero">
+      <div class="hero-text">
+        <div class="hero-eyebrow">✦ Interest-first matrimony</div>
+        <h1 class="hero-h1">Find your <em>companion</em>,<br>not a checklist match.</h1>
+        <p class="hero-sub">Thunai connects Sri Lankan Tamils through shared passions, values, and life goals — not rigid data fields. Because the best partnerships begin with genuine resonance.</p>
+        <div class="hero-btns">
+          <button class="btn-gold">Begin your journey</button>
+          <button class="btn-ghost">See how it works</button>
+        </div>
+        <div class="hero-trust">
+          <div class="hero-trust-dot"></div>
+          <span>4,200+ verified profiles · Sri Lankan Tamil community</span>
+        </div>
+      </div>
+
+      <div class="hero-cards">
+        <div class="hcard hcard-back">
+          <div class="hcard-img" style="background:linear-gradient(135deg,#D8C8D8,#C0A8C8);">🌿</div>
+          <div class="hcard-body">
+            <div class="hcard-name">Priyanka, 28</div>
+          </div>
+        </div>
+        <div class="hcard hcard-mid">
+          <div class="hcard-img" style="background:linear-gradient(135deg,#D8E0C8,#C0CEB0);">🎶</div>
+          <div class="hcard-body">
+            <div class="hcard-name">Anushya, 29</div>
+          </div>
+        </div>
+        <div class="hcard hcard-front">
+          <div class="hcard-img">🌸
+            <div class="hcard-vbadge"><div class="hcard-vdot"></div>Verified</div>
+          </div>
+          <div class="hcard-body">
+            <div class="hcard-name">Kavitha, 27</div>
+            <div class="hcard-meta">Physiotherapist · Melbourne</div>
+            <div class="hcard-shared">
+              <div class="hcard-st">✦ Shared with you</div>
+              <div class="hcard-tags">
+                <span class="hcard-tag">🎶 Ilaiyaraaja</span>
+                <span class="hcard-tag">🏔 Hiking</span>
+                <span class="hcard-tag">🌿 Diaspora</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="features">
+      <div class="feat">
+        <div class="feat-icon"><i class="ti ti-heart" aria-hidden="true"></i></div>
+        <div class="feat-title">Interest-first discovery</div>
+        <p class="feat-desc">Every profile highlights what you have in common — music, food, values, life goals — before age or salary ever enter the picture.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-icon"><i class="ti ti-shield-check" aria-hidden="true"></i></div>
+        <div class="feat-title">Verified & trusted</div>
+        <p class="feat-desc">Every profile goes through photo and ID verification. A community-first safety layer built specifically for the Sri Lankan Tamil diaspora.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-icon"><i class="ti ti-users" aria-hidden="true"></i></div>
+        <div class="feat-title">Culturally rooted</div>
+        <p class="feat-desc">Designed for Tamil speakers at home and abroad. Tamil script, community-native language, and cultural nuance — not a one-size-fits-all platform.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════
+       SCREEN B — DISCOVERY FEED
+  ════════════════════════════════ -->
+  <div class="discovery" id="s-discovery">
+    <div class="sidebar">
+      <div class="sb-logo">
+        <div class="sb-logo-name">Thunai</div>
+        <span class="sb-logo-tm">துணை</span>
+      </div>
+      <div class="sb-nav">
+        <div class="sb-item active"><i class="ti ti-compass" aria-hidden="true"></i>Discover</div>
+        <div class="sb-item"><i class="ti ti-heart" aria-hidden="true"></i>Matches<span class="sb-pip">3</span></div>
+        <div class="sb-item"><i class="ti ti-message" aria-hidden="true"></i>Messages<span class="sb-pip">1</span></div>
+        <div class="sb-item"><i class="ti ti-star" aria-hidden="true"></i>Saved</div>
+        <div class="sb-item"><i class="ti ti-settings" aria-hidden="true"></i>Preferences</div>
+        <div class="sb-item"><i class="ti ti-user" aria-hidden="true"></i>My profile</div>
+      </div>
+      <div class="sb-profile">
+        <div class="sb-av">RK</div>
+        <div>
+          <div class="sb-av-name">Rajan K.</div>
+          <div class="sb-av-status">Profile complete</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="main-feed">
+      <div class="feed-topbar">
+        <div>
+          <div class="feed-title">Discover companions</div>
+          <div class="feed-sub">Showing profiles with shared interests first</div>
+        </div>
+      </div>
+      <div class="filter-row">
+        <span class="fchip active">✦ Shared interests</span>
+        <span class="fchip">Near me</span>
+        <span class="fchip">New profiles</span>
+        <span class="fchip">Values match</span>
+        <span class="fchip">Diaspora</span>
+      </div>
+      <div class="cards-grid">
+
+        <div class="pcard">
+          <div class="pcard-img">🌸
+            <div class="pcard-vb"><div class="pcard-vdot"></div>Verified</div>
+            <div class="pcard-loc">📍 Melbourne, AU</div>
+          </div>
+          <div class="pcard-body">
+            <div class="pcard-nr"><span class="pcard-name">Kavitha</span><span class="pcard-age">27 yrs</span></div>
+            <div class="pcard-meta">Physiotherapist · Jaffna roots</div>
+            <div class="pcard-shared">
+              <div class="pcard-st">✦ You both love</div>
+              <div class="pcard-tags"><span class="pcard-tag">🎶 Ilaiyaraaja</span><span class="pcard-tag">🏔 Hiking</span><span class="pcard-tag">🌿 Diaspora</span></div>
+            </div>
+            <div class="pcard-acts">
+              <button class="pcard-pass">Pass</button>
+              <button class="pcard-conn">Connect ✦</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="pcard">
+          <div class="pcard-img pcard-img-2">🌿
+            <div class="pcard-vb"><div class="pcard-vdot"></div>ID Verified</div>
+            <div class="pcard-loc">📍 London, UK</div>
+          </div>
+          <div class="pcard-body">
+            <div class="pcard-nr"><span class="pcard-name">Anushya</span><span class="pcard-age">29 yrs</span></div>
+            <div class="pcard-meta">UX Designer · Colombo roots</div>
+            <div class="pcard-shared">
+              <div class="pcard-st">✦ You both love</div>
+              <div class="pcard-tags"><span class="pcard-tag">🥘 Home Cooking</span><span class="pcard-tag">💻 Tech & Design</span></div>
+            </div>
+            <div class="pcard-acts">
+              <button class="pcard-pass">Pass</button>
+              <button class="pcard-conn">Connect ✦</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="pcard">
+          <div class="pcard-img pcard-img-3">🎶
+            <div class="pcard-vb"><div class="pcard-vdot"></div>Verified</div>
+            <div class="pcard-loc">📍 Toronto, CA</div>
+          </div>
+          <div class="pcard-body">
+            <div class="pcard-nr"><span class="pcard-name">Thiviya</span><span class="pcard-age">26 yrs</span></div>
+            <div class="pcard-meta">Journalist · Vavuniya roots</div>
+            <div class="pcard-shared">
+              <div class="pcard-st">✦ You both love</div>
+              <div class="pcard-tags"><span class="pcard-tag">📚 Tamil Literature</span><span class="pcard-tag">🌍 Travel</span></div>
+            </div>
+            <div class="pcard-acts">
+              <button class="pcard-pass">Pass</button>
+              <button class="pcard-conn">Connect ✦</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="pcard">
+          <div class="pcard-img pcard-img-4">🌺
+            <div class="pcard-vb"><div class="pcard-vdot"></div>Verified</div>
+            <div class="pcard-loc">📍 Sydney, AU</div>
+          </div>
+          <div class="pcard-body">
+            <div class="pcard-nr"><span class="pcard-name">Meena</span><span class="pcard-age">31 yrs</span></div>
+            <div class="pcard-meta">Architect · Batticaloa roots</div>
+            <div class="pcard-shared">
+              <div class="pcard-st">✦ You both love</div>
+              <div class="pcard-tags"><span class="pcard-tag">🏔 Hiking</span><span class="pcard-tag">🌿 Sustainability</span></div>
+            </div>
+            <div class="pcard-acts">
+              <button class="pcard-pass">Pass</button>
+              <button class="pcard-conn">Connect ✦</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="right-panel">
+      <div class="rp-section">
+        <div class="rp-title">Top matches</div>
+        <div class="rp-match">
+          <div class="rp-av rp-av-1">🌸</div>
+          <div class="rp-info">
+            <div class="rp-name">Kavitha R.</div>
+            <div class="rp-shared">Ilaiyaraaja · Hiking · Diaspora</div>
+          </div>
+          <div class="rp-pct">78%</div>
+        </div>
+        <div class="rp-match">
+          <div class="rp-av rp-av-2">🌿</div>
+          <div class="rp-info">
+            <div class="rp-name">Anushya M.</div>
+            <div class="rp-shared">Home Cooking · Tech & Design</div>
+          </div>
+          <div class="rp-pct">64%</div>
+        </div>
+        <div class="rp-match">
+          <div class="rp-av rp-av-3">🎶</div>
+          <div class="rp-info">
+            <div class="rp-name">Thiviya S.</div>
+            <div class="rp-shared">Tamil Literature · Travel</div>
+          </div>
+          <div class="rp-pct">61%</div>
+        </div>
+      </div>
+
+      <div class="rp-section">
+        <div class="rp-title">Recent activity</div>
+        <div class="rp-activity">
+          <div class="act-item">
+            <div class="act-icon">💬</div>
+            <div>
+              <div class="act-text"><strong>Kavitha</strong> accepted your connection</div>
+              <div class="act-time">2 hours ago</div>
+            </div>
+          </div>
+          <div class="act-item">
+            <div class="act-icon">❤️</div>
+            <div>
+              <div class="act-text"><strong>Anushya</strong> liked your profile</div>
+              <div class="act-time">Yesterday</div>
+            </div>
+          </div>
+          <div class="act-item">
+            <div class="act-icon">✦</div>
+            <div>
+              <div class="act-text">3 new profiles match your interests</div>
+              <div class="act-time">Today</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rp-section">
+        <div class="rp-title">My preferences</div>
+        <div class="rp-pref-row"><span class="rp-pref-label">Age range</span><span class="rp-pref-val">24–34</span></div>
+        <div class="rp-pref-row"><span class="rp-pref-label">Location</span><span class="rp-pref-val">Global</span></div>
+        <div class="rp-pref-row"><span class="rp-pref-label">Interests weight</span><span class="rp-pref-val">High</span></div>
+        <div class="rp-pref-row"><span class="rp-pref-label">Show verified only</span><span class="rp-pref-val">On</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════════════════════
+       SCREEN C — PROFILE VIEW
+  ════════════════════════════════ -->
+  <div class="profileview" id="s-profileview">
+    <div class="sidebar">
+      <div class="sb-logo">
+        <div class="sb-logo-name">Thunai</div>
+        <span class="sb-logo-tm">துணை</span>
+      </div>
+      <div class="sb-nav">
+        <div class="sb-item"><i class="ti ti-compass" aria-hidden="true"></i>Discover</div>
+        <div class="sb-item"><i class="ti ti-heart" aria-hidden="true"></i>Matches<span class="sb-pip">3</span></div>
+        <div class="sb-item"><i class="ti ti-message" aria-hidden="true"></i>Messages</div>
+        <div class="sb-item"><i class="ti ti-star" aria-hidden="true"></i>Saved</div>
+        <div class="sb-item"><i class="ti ti-settings" aria-hidden="true"></i>Preferences</div>
+        <div class="sb-item"><i class="ti ti-user" aria-hidden="true"></i>My profile</div>
+      </div>
+      <div class="sb-profile">
+        <div class="sb-av">RK</div>
+        <div>
+          <div class="sb-av-name">Rajan K.</div>
+          <div class="sb-av-status">Profile complete</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pv-main">
+      <div class="pv-hero-web">
+        <div class="pv-hero-av">🌸</div>
+        <div class="pv-hero-strip">
+          <div class="pv-vstrip-badge"><div class="pv-vstrip-dot"></div>Photo + ID Verified</div>
+          <div class="pv-hero-acts">
+            <button class="pv-ha-btn pv-ha-ghost">Save profile</button>
+            <button class="pv-ha-btn pv-ha-primary">Send request ✦</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="pv-content">
+        <div class="pv-header">
+          <div>
+            <div class="pv-name">Kavitha R. <span class="pv-tamil">கவிதா</span></div>
+            <div class="pv-meta-line">
+              <span>27 years</span><span class="pv-meta-dot">·</span>
+              <span>Melbourne, Australia</span><span class="pv-meta-dot">·</span>
+              <span>Physiotherapist</span>
+            </div>
+            <div class="pv-meta-line" style="margin-top:4px;">
+              <span>Jaffna roots</span><span class="pv-meta-dot">·</span>
+              <span>Hindu</span><span class="pv-meta-dot">·</span>
+              <span>Willing to relocate</span>
+            </div>
+          </div>
+          <div class="pv-compat">
+            <div class="pv-ring">
+              <div class="pv-ring-in"><span class="pv-ring-pct">78%</span><span class="pv-ring-label">match</span></div>
+            </div>
+            <div style="font-size:10px;color:var(--text-muted);margin-top:5px;">Compatibility</div>
+          </div>
+        </div>
+
+        <div style="margin-bottom:20px;">
+          <div class="pv-sec-title">Shared with you</div>
+          <div class="pv-tags">
+            <span class="pv-tag shared">Ilaiyaraaja</span>
+            <span class="pv-tag shared">Hiking</span>
+            <span class="pv-tag shared">Diaspora identity</span>
+          </div>
+        </div>
+
+        <div class="pv-grid">
+          <div>
+            <div class="pv-sec-title">All interests</div>
+            <div class="pv-tags">
+              <span class="pv-tag shared">🎶 Ilaiyaraaja</span>
+              <span class="pv-tag shared">🏔 Hiking</span>
+              <span class="pv-tag shared">🌿 Diaspora</span>
+              <span class="pv-tag">🥘 Home Cooking</span>
+              <span class="pv-tag">📚 Tamil Literature</span>
+              <span class="pv-tag">🎭 Classical Dance</span>
+              <span class="pv-tag">🌱 Sustainability</span>
+              <span class="pv-tag">🧘 Wellness</span>
+            </div>
+          </div>
+          <div>
+            <div class="pv-sec-title">Core values</div>
+            <div class="pv-vals">
+              <div class="pv-val-card"><div class="pv-val-label">Family</div><div class="pv-val-val">Very family-led</div></div>
+              <div class="pv-val-card"><div class="pv-val-label">Cultural roots</div><div class="pv-val-val">Strongly tied</div></div>
+              <div class="pv-val-card"><div class="pv-val-label">Settling goal</div><div class="pv-val-val">Open to reloc.</div></div>
+              <div class="pv-val-card"><div class="pv-val-label">Religion</div><div class="pv-val-val">Hindu · flexible</div></div>
+            </div>
+          </div>
+          <div class="pv-about">
+            <div class="pv-sec-title">About Kavitha</div>
+            <p style="font-size:13px;color:var(--text-mid);line-height:1.8;">Physio by day, trail runner on weekends. Grew up between Jaffna and Melbourne — both identities feel like home. I believe conversations over coffee matter more than a checklist. Looking for someone who's as comfortable at a Carnatic concert as they are on a mountain trail.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pv-right">
+      <div class="pv-action-stack">
+        <button class="pv-btn-full pv-btn-primary">✦ Send connection request</button>
+        <button class="pv-btn-full pv-btn-secondary">🔖 Save to shortlist</button>
+        <button class="pv-btn-full pv-btn-secondary">💬 Send a note first</button>
+      </div>
+
+      <div class="pv-safety">
+        <div class="pv-safety-title"><i class="ti ti-shield-check" aria-hidden="true" style="font-size:14px;"></i>Safety & verification</div>
+        <div class="pv-safety-item"><div class="pv-safety-check">✓</div>Photo verified by Thunai team</div>
+        <div class="pv-safety-item"><div class="pv-safety-check">✓</div>Government ID confirmed</div>
+        <div class="pv-safety-item"><div class="pv-safety-check">✓</div>Community reference checked</div>
+        <div class="pv-safety-item"><div class="pv-safety-check">✓</div>Active in last 7 days</div>
+      </div>
+
+      <div class="rp-section">
+        <div class="rp-title">Quick stats</div>
+        <div class="rp-pref-row"><span class="rp-pref-label">Response rate</span><span class="rp-pref-val" style="color:var(--verified);">High</span></div>
+        <div class="rp-pref-row"><span class="rp-pref-label">Joined</span><span class="rp-pref-val">March 2025</span></div>
+        <div class="rp-pref-row"><span class="rp-pref-label">Last active</span><span class="rp-pref-val">2 days ago</span></div>
+        <div class="rp-pref-row"><span class="rp-pref-label">Shared interests</span><span class="rp-pref-val" style="color:var(--maroon);">3 of 8</span></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function ws(id, btn) {
+  ['landing','discovery','profileview'].forEach(s => {
+    const el = document.getElementById('s-'+s);
+    el.classList.remove('vis');
+    el.style.display = '';
+  });
+  const target = document.getElementById('s-'+id);
+  target.classList.add('vis');
+  if(id === 'discovery' || id === 'profileview') {
+    target.style.display = 'grid';
+  } else {
+    target.style.display = 'block';
+  }
+  document.querySelectorAll('.stab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+}
+</script>

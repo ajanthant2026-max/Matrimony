@@ -1,0 +1,861 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=Noto+Sans+Tamil:wght@400;500&display=swap');
+
+:root {
+  --rose:#B5334A; --rose-d:#8A1F34; --rose-l:#FBEDF0; --rose-m:#D4536A;
+  --amber:#C4870C; --amber-l:#FDF3DC; --amber-m:#E5A820; --amber-pale:#FEF9EE;
+  --sage:#2E7D6E; --sage-l:#E6F4F1; --sage-m:#3E9E8C;
+  --cream:#FDF8F2; --cream2:#F7EFE4; --cream3:#EFE3D0; --white:#FFFFFF;
+  --ink:#2C1218; --ink2:#5A2D38; --ink3:#8A5E68; --ink4:#B89AA4;
+  --page:#FAF5EE;
+}
+
+*{box-sizing:border-box;margin:0;padding:0;}
+body,.wrap{font-family:'DM Sans',sans-serif;background:var(--page);}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);}
+
+/* ── SCREEN TABS ── */
+.tabs{display:flex;gap:6px;padding:10px 14px;background:var(--white);border-bottom:1.5px solid var(--cream3);}
+.tab{padding:8px 18px;border-radius:20px;border:1.5px solid var(--cream3);background:var(--white);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;color:var(--ink3);cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:6px;}
+.tab i{font-size:14px;}
+.tab.on{background:var(--rose);border-color:var(--rose);color:#fff;}
+
+/* ── KOLAM SVG DIVIDER ── */
+.kolam-strip{background:var(--amber-pale);padding:7px 0;overflow:hidden;display:flex;align-items:center;justify-content:center;border-top:1px solid var(--cream3);border-bottom:1px solid var(--cream3);}
+
+/* ── TOP NAV ── */
+.nav{height:64px;background:var(--white);border-bottom:1.5px solid var(--cream3);display:flex;align-items:center;padding:0 28px;gap:0;}
+.nlogo{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:600;color:var(--rose-d);letter-spacing:.02em;margin-right:32px;line-height:1;}
+.nlogo-sub{font-family:'Noto Sans Tamil',sans-serif;font-size:10px;color:var(--amber);display:block;margin-top:2px;}
+.nlinks{display:flex;gap:2px;flex:1;}
+.nl{display:flex;align-items:center;gap:6px;padding:7px 13px;border-radius:20px;font-size:13px;color:var(--ink3);cursor:pointer;transition:all .18s;}
+.nl i{font-size:16px;}
+.nl.on{background:var(--rose-l);color:var(--rose-d);font-weight:500;}
+.nl:hover:not(.on){background:var(--cream2);color:var(--ink2);}
+.nacts{display:flex;align-items:center;gap:8px;}
+.nibtn{width:36px;height:36px;border-radius:50%;background:var(--cream2);border:1.5px solid var(--cream3);display:flex;align-items:center;justify-content:center;color:var(--ink3);font-size:17px;cursor:pointer;position:relative;}
+.nibtn.dot::after{content:'';position:absolute;top:5px;right:5px;width:8px;height:8px;border-radius:50%;background:var(--rose);border:1.5px solid var(--white);}
+.nav-av{width:36px;height:36px;border-radius:50%;background:var(--rose-l);border:2px solid var(--rose-m);display:flex;align-items:center;justify-content:center;color:var(--rose-d);font-size:11px;font-weight:500;cursor:pointer;}
+
+/* ── SCREENS ── */
+.scr{display:none;} .scr.on{display:block;} .scr.grid-on{display:grid!important;}
+
+/* ════════════════════════
+   LANDING
+════════════════════════ */
+.hero{background:var(--cream);padding:52px 32px 48px;display:grid;grid-template-columns:1fr 380px;gap:44px;align-items:center;position:relative;overflow:hidden;}
+.hero-kolam{position:absolute;top:-30px;right:420px;opacity:.07;pointer-events:none;}
+.h-eyebrow{font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.h-eyebrow i{font-size:15px;color:var(--amber-m);}
+.h1{font-family:'Cormorant Garamond',serif;font-size:46px;font-weight:600;color:var(--rose-d);line-height:1.1;margin-bottom:14px;}
+.h1 em{color:var(--amber);font-style:italic;}
+.h-sub{font-size:14px;color:var(--ink3);line-height:1.75;max-width:420px;margin-bottom:28px;}
+.hbtns{display:flex;gap:10px;margin-bottom:22px;}
+.btn-rose{padding:13px 26px;border-radius:24px;background:var(--rose);border:none;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;color:#fff;cursor:pointer;display:flex;align-items:center;gap:8px;}
+.btn-rose i{font-size:16px;}
+.btn-out{padding:12px 22px;border-radius:24px;background:transparent;border:1.5px solid var(--cream3);font-family:'DM Sans',sans-serif;font-size:14px;color:var(--ink2);cursor:pointer;display:flex;align-items:center;gap:8px;}
+.btn-out i{font-size:16px;}
+.trust-list{display:flex;flex-direction:column;gap:8px;}
+.trust-row{display:flex;align-items:center;gap:9px;font-size:12px;color:var(--ink3);}
+.trust-row i{font-size:15px;color:var(--sage-m);}
+
+/* hero card stack */
+.hstack{position:relative;height:320px;}
+.hcard{position:absolute;background:var(--white);border-radius:20px;overflow:hidden;border:1.5px solid var(--cream3);}
+.hc-b{width:240px;height:262px;top:38px;right:0;transform:rotate(5deg);opacity:.4;}
+.hc-m{width:252px;height:274px;top:18px;right:18px;transform:rotate(1.5deg);opacity:.72;}
+.hc-f{width:264px;height:286px;top:0;right:36px;}
+.hc-img{height:148px;display:flex;align-items:center;justify-content:center;position:relative;}
+.hci-1{background:#F5E8DE;}  .hci-2{background:#E8F0DE;}  .hci-3{background:#E8DEF0;}
+.hc-av-wrap{width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.6);}
+.hc-av-wrap i{font-size:30px;color:rgba(92,30,42,.3);}
+.hc-vbadge{position:absolute;top:9px;right:9px;background:var(--white);border-radius:20px;padding:3px 9px 3px 5px;display:flex;align-items:center;gap:4px;font-size:9px;font-weight:500;color:var(--sage);border:1px solid var(--sage-l);}
+.hc-vdot{width:6px;height:6px;border-radius:50%;background:var(--sage-m);}
+.hc-loc-b{position:absolute;bottom:8px;left:8px;background:rgba(44,18,24,.6);color:rgba(255,255,255,.9);border-radius:14px;padding:2px 9px;font-size:9px;display:flex;align-items:center;gap:4px;}
+.hc-loc-b i{font-size:11px;}
+.hc-body{padding:12px 14px;}
+.hc-name{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:600;color:var(--rose-d);margin-bottom:2px;}
+.hc-meta{font-size:10px;color:var(--ink3);margin-bottom:9px;display:flex;align-items:center;gap:5px;}
+.hc-meta i{font-size:12px;color:var(--ink4);}
+.shared-badge{background:var(--amber-l);border:1px solid rgba(196,135,12,.2);border-radius:8px;padding:6px 10px;}
+.sb-title{font-size:8px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);margin-bottom:5px;display:flex;align-items:center;gap:4px;}
+.sb-title i{font-size:11px;}
+.sb-tags{display:flex;gap:4px;flex-wrap:wrap;}
+.sb-tag{font-size:9px;background:rgba(196,135,12,.1);color:var(--rose-d);border-radius:20px;padding:2px 7px;font-weight:500;}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--cream3);}
+.stat{background:var(--white);padding:20px 22px;display:flex;align-items:center;gap:12px;}
+.stat-ic{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.ic-rose{background:var(--rose-l);color:var(--rose);}
+.ic-amber{background:var(--amber-l);color:var(--amber);}
+.ic-sage{background:var(--sage-l);color:var(--sage);}
+.ic-cream{background:var(--cream2);color:var(--rose-d);}
+.stat-n{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:600;color:var(--rose-d);}
+.stat-l{font-size:11px;color:var(--ink3);}
+
+/* features */
+.feats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--cream3);}
+.feat{background:var(--cream);padding:28px;}
+.fi{width:46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:14px;border:1.5px solid;}
+.fi-rose{background:var(--rose-l);color:var(--rose);border-color:rgba(181,51,74,.15);}
+.fi-amber{background:var(--amber-l);color:var(--amber);border-color:rgba(196,135,12,.15);}
+.fi-sage{background:var(--sage-l);color:var(--sage);border-color:rgba(46,125,110,.15);}
+.feat-t{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600;color:var(--rose-d);margin-bottom:6px;}
+.feat-d{font-size:12px;color:var(--ink3);line-height:1.65;}
+
+/* ════════════════════════
+   DISCOVERY
+════════════════════════ */
+.disc-shell{display:grid;grid-template-columns:212px 1fr 270px;height:592px;}
+
+.sb{background:var(--white);border-right:1.5px solid var(--cream3);display:flex;flex-direction:column;}
+.sb-logo{padding:18px 18px 14px;border-bottom:1px solid var(--cream3);}
+.sb-ln{font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:600;color:var(--rose-d);line-height:1;}
+.sb-lt{font-family:'Noto Sans Tamil',sans-serif;font-size:10px;color:var(--amber);display:block;margin-top:2px;}
+.sb-sect{padding:14px 14px 4px;font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink4);}
+.sb-nav{padding:0 10px;flex:1;}
+.sbi{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:20px;cursor:pointer;color:var(--ink3);font-size:12px;margin-bottom:3px;transition:all .15s;position:relative;}
+.sbi i{font-size:17px;flex-shrink:0;}
+.sbi.on{background:var(--rose-l);color:var(--rose-d);font-weight:500;}
+.sbi:hover:not(.on){background:var(--cream2);color:var(--ink2);}
+.pip{margin-left:auto;min-width:18px;height:18px;border-radius:9px;background:var(--rose);color:#fff;font-size:9px;font-weight:600;display:flex;align-items:center;justify-content:center;padding:0 4px;}
+.sb-user{padding:13px 14px;border-top:1px solid var(--cream3);display:flex;align-items:center;gap:9px;}
+.sb-uav{width:34px;height:34px;border-radius:50%;background:var(--rose-l);border:2px solid var(--rose-m);display:flex;align-items:center;justify-content:center;color:var(--rose-d);font-size:11px;font-weight:500;flex-shrink:0;}
+.sb-un{font-size:12px;font-weight:500;color:var(--ink);}
+.sb-us{font-size:10px;color:var(--ink3);display:flex;align-items:center;gap:3px;margin-top:1px;}
+.sb-us i{font-size:12px;color:var(--sage-m);}
+
+.feed-main{background:var(--cream2);overflow-y:auto;padding:18px;}
+.feed-main::-webkit-scrollbar{width:4px;}
+.feed-main::-webkit-scrollbar-thumb{background:var(--cream3);border-radius:4px;}
+.feed-hdr{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px;}
+.feed-ttl{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600;color:var(--rose-d);}
+.feed-sub{font-size:11px;color:var(--ink3);margin-top:2px;display:flex;align-items:center;gap:5px;}
+.feed-sub i{font-size:13px;color:var(--amber);}
+.feed-sort{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--ink3);background:var(--white);border:1.5px solid var(--cream3);border-radius:20px;padding:5px 12px;cursor:pointer;}
+.feed-sort i{font-size:14px;color:var(--rose);}
+
+.chips{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap;}
+.chip{padding:6px 14px;border-radius:20px;border:1.5px solid var(--cream3);font-size:11px;font-weight:500;color:var(--ink3);cursor:pointer;background:var(--white);display:flex;align-items:center;gap:5px;}
+.chip i{font-size:13px;}
+.chip.on{background:var(--rose);border-color:var(--rose);color:#fff;}
+.chip.on i{color:rgba(255,255,255,.85);}
+
+.cgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+.pc{background:var(--white);border-radius:18px;overflow:hidden;border:1.5px solid var(--cream3);cursor:pointer;transition:border-color .2s;}
+.pc:hover{border-color:rgba(181,51,74,.3);}
+.pci{height:138px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.pci-1{background:#F5E8DE;} .pci-2{background:#E8F0DE;} .pci-3{background:#E8DEF0;} .pci-4{background:#DEE8F0;}
+.pc-av{width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.55);display:flex;align-items:center;justify-content:center;}
+.pc-av i{font-size:26px;color:rgba(90,45,56,.3);}
+.pc-vb{position:absolute;top:8px;right:8px;background:var(--white);border-radius:16px;padding:3px 8px 3px 5px;display:flex;align-items:center;gap:3px;font-size:9px;font-weight:500;color:var(--sage);border:1px solid var(--sage-l);}
+.pc-vd{width:6px;height:6px;border-radius:50%;background:var(--sage-m);flex-shrink:0;}
+.pc-loc{position:absolute;bottom:7px;left:7px;background:rgba(44,18,24,.58);color:rgba(255,255,255,.9);border-radius:13px;padding:2px 8px;font-size:9px;display:flex;align-items:center;gap:3px;}
+.pc-loc i{font-size:11px;}
+.pc-save{position:absolute;bottom:7px;right:8px;width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.85);border:none;display:flex;align-items:center;justify-content:center;color:var(--rose);font-size:14px;cursor:pointer;}
+.pc-body{padding:11px 13px 13px;}
+.pc-nr{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:2px;}
+.pc-name{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:600;color:var(--rose-d);}
+.pc-age{font-size:10px;color:var(--ink3);}
+.pc-meta{font-size:10px;color:var(--ink3);margin-bottom:8px;display:flex;align-items:center;gap:4px;flex-wrap:wrap;}
+.pc-meta i{font-size:12px;color:var(--ink4);}
+.pc-shared{background:var(--amber-l);border:1px solid rgba(196,135,12,.18);border-radius:8px;padding:6px 9px;margin-bottom:9px;}
+.pc-st{font-size:8px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);margin-bottom:4px;display:flex;align-items:center;gap:4px;}
+.pc-st i{font-size:11px;}
+.pc-tags{display:flex;gap:4px;flex-wrap:wrap;}
+.pc-tag{font-size:9px;background:rgba(196,135,12,.1);color:var(--rose-d);border-radius:20px;padding:2px 7px;font-weight:500;}
+.pc-acts{display:flex;gap:6px;}
+.btn-pass{flex:1;padding:8px 0;border-radius:20px;border:1.5px solid var(--cream3);background:transparent;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;color:var(--ink3);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;}
+.btn-pass i{font-size:13px;}
+.btn-conn{flex:2;padding:8px 0;border-radius:20px;border:none;background:var(--rose);font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:4px;}
+.btn-conn i{font-size:13px;}
+
+.rp{background:var(--white);border-left:1.5px solid var(--cream3);overflow-y:auto;padding:16px 15px;}
+.rp::-webkit-scrollbar{width:3px;}
+.rp::-webkit-scrollbar-thumb{background:var(--cream3);border-radius:3px;}
+.rp-t{font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);margin-bottom:10px;display:flex;align-items:center;gap:5px;}
+.rp-t i{font-size:13px;}
+.rp-t::after{content:'';flex:1;height:1px;background:rgba(196,135,12,.18);}
+.rp-sec{margin-bottom:18px;}
+
+.match-row{display:flex;align-items:center;gap:9px;padding:8px 9px;border-radius:12px;cursor:pointer;border:1.5px solid transparent;margin-bottom:4px;transition:all .15s;}
+.match-row:hover{background:var(--cream);border-color:var(--cream3);}
+.m-av{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.m-av i{font-size:20px;color:rgba(90,45,56,.3);}
+.m1{background:#F5E8DE;} .m2{background:#E8F0DE;} .m3{background:#E8DEF0;}
+.m-name{font-size:12px;font-weight:500;color:var(--ink);}
+.m-sh{font-size:10px;color:var(--ink3);display:flex;align-items:center;gap:3px;margin-top:1px;}
+.m-sh i{font-size:11px;color:var(--amber);}
+.m-pct{font-size:12px;font-weight:600;color:var(--rose);}
+
+.act-list{display:flex;flex-direction:column;gap:7px;}
+.act{display:flex;align-items:flex-start;gap:8px;padding:9px 10px;border-radius:12px;background:var(--cream);border:1px solid var(--cream3);}
+.act-ic{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;margin-top:1px;}
+.ai-amber{background:var(--amber-l);color:var(--amber);}
+.ai-rose{background:var(--rose-l);color:var(--rose);}
+.ai-sage{background:var(--sage-l);color:var(--sage);}
+.act-tx{font-size:11px;color:var(--ink2);line-height:1.45;}
+.act-tx strong{color:var(--ink);font-weight:500;}
+.act-tm{font-size:9px;color:var(--ink4);margin-top:2px;display:flex;align-items:center;gap:3px;}
+.act-tm i{font-size:11px;}
+
+.pref-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--cream3);font-size:11px;}
+.pref-row:last-child{border-bottom:none;}
+.pref-l{color:var(--ink3);display:flex;align-items:center;gap:5px;}
+.pref-l i{font-size:13px;color:var(--ink4);}
+.pref-v{color:var(--ink);font-weight:500;}
+
+/* ════════════════════════
+   PROFILE VIEW
+════════════════════════ */
+.pv-shell{display:grid;grid-template-columns:212px 1fr 270px;height:592px;}
+.pv-main{overflow-y:auto;background:var(--cream2);}
+.pv-main::-webkit-scrollbar{width:4px;}
+.pv-main::-webkit-scrollbar-thumb{background:var(--cream3);border-radius:4px;}
+
+.pv-hero{height:218px;background:#F0E3D4;display:flex;align-items:flex-end;position:relative;overflow:hidden;}
+.pv-bg-i{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;}
+.pv-bg-i i{font-size:96px;color:rgba(90,45,56,.1);}
+.pv-kolam-bg{position:absolute;top:10px;left:10px;opacity:.12;}
+.pv-overlay{position:absolute;inset:0;background:rgba(44,18,24,.25);}
+.pv-toprow{position:absolute;top:10px;left:0;right:0;padding:0 16px;display:flex;justify-content:space-between;z-index:2;}
+.pv-tbtn{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;cursor:pointer;}
+.pv-tbtn-row{display:flex;gap:6px;}
+.pv-strip{position:relative;z-index:2;width:100%;padding:10px 16px;display:flex;align-items:flex-end;justify-content:space-between;}
+.pv-vbadge{display:flex;align-items:center;gap:5px;background:rgba(46,125,110,.85);border-radius:20px;padding:4px 11px;font-size:10px;font-weight:500;color:#fff;}
+.pv-vbadge i{font-size:13px;}
+.pv-vdot{width:6px;height:6px;border-radius:50%;background:#6EE7B7;}
+.pv-hero-acts{display:flex;gap:7px;}
+.pv-hbtn{padding:7px 14px;border-radius:20px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;cursor:pointer;display:flex;align-items:center;gap:5px;border:none;}
+.pv-hbtn i{font-size:13px;}
+.pv-ghost{background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.3);}
+.pv-pri{background:var(--rose);color:#fff;}
+
+.pv-content{padding:22px 24px;background:var(--cream);}
+.pv-hdr{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px;padding-bottom:18px;border-bottom:1.5px solid var(--cream3);}
+.pv-name{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;color:var(--rose-d);line-height:1.05;}
+.pv-tamil{font-family:'Noto Sans Tamil',sans-serif;font-size:13px;color:var(--amber);display:block;margin-top:3px;}
+.pv-mline{font-size:12px;color:var(--ink3);margin-top:6px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
+.pv-mline i{font-size:13px;color:var(--ink4);}
+.pv-dot{color:var(--amber);font-size:10px;}
+.ring-wrap{text-align:center;}
+.ring{width:68px;height:68px;border-radius:50%;background:conic-gradient(var(--rose) 0% 78%,var(--cream3) 78% 100%);display:flex;align-items:center;justify-content:center;}
+.ring-in{width:52px;height:52px;border-radius:50%;background:var(--cream);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:1px;}
+.ring-pct{font-size:13px;font-weight:600;color:var(--rose-d);line-height:1;}
+.ring-lbl{font-size:8px;color:var(--ink3);}
+
+.pv-shared-banner{background:var(--amber-l);border:1.5px solid rgba(196,135,12,.2);border-radius:13px;padding:12px 14px;margin-bottom:18px;}
+.pvs-t{font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);margin-bottom:8px;display:flex;align-items:center;gap:5px;}
+.pvs-t i{font-size:13px;}
+.pvtags{display:flex;flex-wrap:wrap;gap:6px;}
+.pvtag{padding:5px 12px;border-radius:20px;background:var(--cream2);border:1.5px solid var(--cream3);font-size:11px;color:var(--ink2);display:flex;align-items:center;gap:5px;}
+.pvtag i{font-size:12px;color:var(--ink4);}
+.pvtag.sh{background:rgba(196,135,12,.1);border-color:rgba(196,135,12,.25);color:var(--rose-d);font-weight:500;}
+.pvtag.sh i{color:var(--amber);}
+
+.pv-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.sec-t{font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--rose);margin-bottom:10px;display:flex;align-items:center;gap:5px;}
+.sec-t i{font-size:13px;}
+.sec-t::after{content:'';flex:1;height:1px;background:rgba(181,51,74,.12);}
+.pv-vals{display:grid;grid-template-columns:1fr 1fr;gap:7px;}
+.pv-val{background:var(--cream2);border-radius:10px;padding:10px 12px;border:1.5px solid var(--cream3);}
+.pv-vl{font-size:9px;color:var(--ink3);margin-bottom:3px;display:flex;align-items:center;gap:4px;}
+.pv-vl i{font-size:11px;color:var(--ink4);}
+.pv-vv{font-size:12px;font-weight:500;color:var(--ink2);}
+.pv-about{font-size:12px;color:var(--ink2);line-height:1.8;grid-column:1/-1;}
+
+.pv-rp{background:var(--white);border-left:1.5px solid var(--cream3);padding:16px 15px;overflow-y:auto;}
+.pv-rp::-webkit-scrollbar{width:3px;}
+.pv-rp::-webkit-scrollbar-thumb{background:var(--cream3);border-radius:3px;}
+.act-stack{display:flex;flex-direction:column;gap:8px;margin-bottom:18px;}
+.pvbtn{width:100%;padding:11px;border-radius:20px;border:none;font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;}
+.pvbtn i{font-size:15px;}
+.pvbtn.pri{background:var(--rose);color:#fff;}
+.pvbtn.sec{background:var(--cream2);border:1.5px solid var(--cream3);color:var(--ink2);}
+
+.safety-block{background:var(--sage-l);border:1.5px solid rgba(46,125,110,.2);border-radius:13px;padding:12px 13px;margin-bottom:16px;}
+.sc-t{font-size:10px;font-weight:600;color:var(--sage);margin-bottom:9px;display:flex;align-items:center;gap:6px;}
+.sc-t i{font-size:15px;}
+.sc-item{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--ink2);margin-bottom:5px;}
+.sc-item:last-child{margin-bottom:0;}
+.sc-item i{font-size:14px;color:var(--sage-m);}
+.ck{width:16px;height:16px;border-radius:50%;background:var(--sage-m);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.ck i{font-size:9px;}
+
+.qs-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--cream3);font-size:11px;}
+.qs-row:last-child{border-bottom:none;}
+.qs-l{color:var(--ink3);display:flex;align-items:center;gap:5px;}
+.qs-l i{font-size:13px;color:var(--ink4);}
+.qs-v{color:var(--ink);font-weight:500;}
+.qv-sage{color:var(--sage);}
+.qv-rose{color:var(--rose);}
+</style>
+
+<div class="wrap">
+<h2 class="sr-only">Thunai — light, culturally-rooted web UI with kolam patterns, warm cream palette, and rich Tabler icons across landing, discovery, and profile screens.</h2>
+
+<div class="tabs">
+  <button class="tab on" onclick="sw('land',this)"><i class="ti ti-home" aria-hidden="true"></i>Landing</button>
+  <button class="tab" onclick="sw('disc',this)"><i class="ti ti-compass" aria-hidden="true"></i>Discovery</button>
+  <button class="tab" onclick="sw('prof',this)"><i class="ti ti-user-circle" aria-hidden="true"></i>Profile view</button>
+</div>
+
+<!-- ══════════════════════════════
+     LANDING
+══════════════════════════════ -->
+<div class="scr on" id="s-land">
+  <div class="nav">
+    <div class="nlogo">Thunai <span class="nlogo-sub">துணை · Companion</span></div>
+    <div class="nlinks">
+      <span class="nl on"><i class="ti ti-compass" aria-hidden="true"></i>Discover</span>
+      <span class="nl"><i class="ti ti-info-circle" aria-hidden="true"></i>How it works</span>
+      <span class="nl"><i class="ti ti-messages" aria-hidden="true"></i>Stories</span>
+      <span class="nl"><i class="ti ti-users" aria-hidden="true"></i>Community</span>
+    </div>
+    <div class="nacts">
+      <div class="nibtn dot" aria-label="Notifications"><i class="ti ti-bell" aria-hidden="true"></i></div>
+      <div class="nibtn" aria-label="Messages"><i class="ti ti-message" aria-hidden="true"></i></div>
+      <div class="nav-av" aria-label="My profile">RK</div>
+    </div>
+  </div>
+
+  <!-- Kolam strip -->
+  <div class="kolam-strip">
+    <svg width="640" height="28" viewBox="0 0 640 28" role="img"><title>Decorative kolam border pattern</title>
+      <defs><pattern id="kp" x="0" y="0" width="40" height="28" patternUnits="userSpaceOnUse">
+        <circle cx="20" cy="14" r="3" fill="none" stroke="#C4870C" stroke-width="1"/>
+        <circle cx="20" cy="14" r="6" fill="none" stroke="#C4870C" stroke-width=".5" stroke-dasharray="2 2"/>
+        <line x1="0" y1="14" x2="8" y2="14" stroke="#C4870C" stroke-width=".8"/>
+        <line x1="32" y1="14" x2="40" y2="14" stroke="#C4870C" stroke-width=".8"/>
+        <line x1="20" y1="0" x2="20" y2="6" stroke="#C4870C" stroke-width=".8"/>
+        <line x1="20" y1="22" x2="20" y2="28" stroke="#C4870C" stroke-width=".8"/>
+        <circle cx="20" cy="14" r="1.5" fill="#C4870C"/>
+      </pattern></defs>
+      <rect width="640" height="28" fill="url(#kp)"/>
+    </svg>
+  </div>
+
+  <div class="hero">
+    <!-- Kolam watermark in background -->
+    <svg class="hero-kolam" width="220" height="220" viewBox="0 0 220 220" role="img" aria-hidden="true"><title></title>
+      <g transform="translate(110,110)">
+        <circle r="80" fill="none" stroke="#C4870C" stroke-width="1" stroke-dasharray="4 4"/>
+        <circle r="60" fill="none" stroke="#C4870C" stroke-width=".8" stroke-dasharray="3 3"/>
+        <circle r="40" fill="none" stroke="#C4870C" stroke-width=".8"/>
+        <circle r="20" fill="none" stroke="#B5334A" stroke-width="1"/>
+        <circle r="4" fill="#C4870C"/>
+        <g><line x1="0" y1="-80" x2="0" y2="-60" stroke="#C4870C" stroke-width="1"/><line x1="0" y1="60" x2="0" y2="80" stroke="#C4870C" stroke-width="1"/><line x1="-80" y1="0" x2="-60" y2="0" stroke="#C4870C" stroke-width="1"/><line x1="60" y1="0" x2="80" y2="0" stroke="#C4870C" stroke-width="1"/></g>
+        <g transform="rotate(45)"><line x1="0" y1="-80" x2="0" y2="-60" stroke="#B5334A" stroke-width=".8"/><line x1="0" y1="60" x2="0" y2="80" stroke="#B5334A" stroke-width=".8"/><line x1="-80" y1="0" x2="-60" y2="0" stroke="#B5334A" stroke-width=".8"/><line x1="60" y1="0" x2="80" y2="0" stroke="#B5334A" stroke-width=".8"/></g>
+        <circle cx="0" cy="-70" r="3" fill="#B5334A"/><circle cx="0" cy="70" r="3" fill="#B5334A"/>
+        <circle cx="-70" cy="0" r="3" fill="#B5334A"/><circle cx="70" cy="0" r="3" fill="#B5334A"/>
+        <circle cx="49" cy="-49" r="2" fill="#C4870C"/><circle cx="-49" cy="-49" r="2" fill="#C4870C"/>
+        <circle cx="49" cy="49" r="2" fill="#C4870C"/><circle cx="-49" cy="49" r="2" fill="#C4870C"/>
+      </g>
+    </svg>
+
+    <div>
+      <div class="h-eyebrow"><i class="ti ti-sparkles" aria-hidden="true"></i>Interest-first matrimony · ATTNAM Labs</div>
+      <div class="h1">Find your <em>companion</em>,<br>not a checklist match.</div>
+      <p class="h-sub">Thunai connects Sri Lankan Tamils through shared passions, values and life goals — not rigid data fields. Because the best partnerships begin with genuine resonance.</p>
+      <div class="hbtns">
+        <button class="btn-rose"><i class="ti ti-heart" aria-hidden="true"></i>Begin your journey</button>
+        <button class="btn-out"><i class="ti ti-player-play" aria-hidden="true"></i>See how it works</button>
+      </div>
+      <div class="trust-list">
+        <div class="trust-row"><i class="ti ti-shield-check" aria-hidden="true"></i>4,200+ verified profiles · Sri Lankan Tamil community</div>
+        <div class="trust-row"><i class="ti ti-world" aria-hidden="true"></i>Active diaspora across AU, UK, CA, DE &amp; SL</div>
+        <div class="trust-row"><i class="ti ti-lock" aria-hidden="true"></i>Privacy-first · your data stays yours</div>
+      </div>
+    </div>
+
+    <div class="hstack">
+      <div class="hcard hc-b">
+        <div class="hc-img hci-3"><div class="hc-av-wrap"><i class="ti ti-user-circle" aria-hidden="true"></i></div></div>
+        <div class="hc-body"><div class="hc-name">Priyanka, 28</div></div>
+      </div>
+      <div class="hcard hc-m">
+        <div class="hc-img hci-2">
+          <div class="hc-av-wrap"><i class="ti ti-user-circle" aria-hidden="true"></i></div>
+          <div class="hc-vbadge"><div class="hc-vdot"></div>Verified</div>
+        </div>
+        <div class="hc-body">
+          <div class="hc-name">Anushya, 29</div>
+          <div class="hc-meta"><i class="ti ti-palette" aria-hidden="true"></i>UX Designer · London</div>
+        </div>
+      </div>
+      <div class="hcard hc-f">
+        <div class="hc-img hci-1">
+          <div class="hc-av-wrap"><i class="ti ti-user-circle" aria-hidden="true"></i></div>
+          <div class="hc-vbadge"><div class="hc-vdot"></div>ID Verified</div>
+          <div class="hc-loc-b"><i class="ti ti-map-pin" aria-hidden="true"></i>Melbourne, AU</div>
+        </div>
+        <div class="hc-body">
+          <div class="hc-name">Kavitha, 27</div>
+          <div class="hc-meta"><i class="ti ti-stethoscope" aria-hidden="true"></i>Physiotherapist <span style="color:var(--amber);margin:0 3px;">·</span><i class="ti ti-map-2" aria-hidden="true"></i>Jaffna</div>
+          <div class="shared-badge">
+            <div class="sb-title"><i class="ti ti-sparkles" aria-hidden="true"></i>Shared with you</div>
+            <div class="sb-tags"><span class="sb-tag">Ilaiyaraaja</span><span class="sb-tag">Hiking</span><span class="sb-tag">Diaspora</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="stat-ic ic-rose"><i class="ti ti-users" aria-hidden="true"></i></div><div><div class="stat-n">4,200+</div><div class="stat-l">Verified profiles</div></div></div>
+    <div class="stat"><div class="stat-ic ic-amber"><i class="ti ti-heart" aria-hidden="true"></i></div><div><div class="stat-n">380+</div><div class="stat-l">Connections made</div></div></div>
+    <div class="stat"><div class="stat-ic ic-sage"><i class="ti ti-shield-check" aria-hidden="true"></i></div><div><div class="stat-n">100%</div><div class="stat-l">ID-verified members</div></div></div>
+    <div class="stat"><div class="stat-ic ic-cream"><i class="ti ti-world" aria-hidden="true"></i></div><div><div class="stat-n">12</div><div class="stat-l">Countries represented</div></div></div>
+  </div>
+
+  <div class="kolam-strip">
+    <svg width="640" height="28" viewBox="0 0 640 28" role="img" aria-hidden="true"><title></title>
+      <rect width="640" height="28" fill="url(#kp)"/>
+    </svg>
+  </div>
+
+  <div class="feats">
+    <div class="feat">
+      <div class="fi fi-rose"><i class="ti ti-heart" aria-hidden="true"></i></div>
+      <div class="feat-t">Interest-first discovery</div>
+      <p class="feat-d">Every profile surfaces what you share — music, food, values, life goals — before age or salary enters the picture. Resonance before résumé.</p>
+    </div>
+    <div class="feat">
+      <div class="fi fi-amber"><i class="ti ti-shield-check" aria-hidden="true"></i></div>
+      <div class="feat-t">Verified &amp; trusted</div>
+      <p class="feat-d">Photo and government ID verification on every profile — a community-first safety layer built specifically for the Sri Lankan Tamil diaspora.</p>
+    </div>
+    <div class="feat">
+      <div class="fi fi-sage"><i class="ti ti-users" aria-hidden="true"></i></div>
+      <div class="feat-t">Culturally rooted</div>
+      <p class="feat-d">Tamil script, diaspora nuance, and community values at the core — not a generic platform retrofitted for our people.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     DISCOVERY
+══════════════════════════════ -->
+<div class="scr" id="s-disc">
+  <div class="nav">
+    <div class="nlogo">Thunai <span class="nlogo-sub">துணை</span></div>
+    <div class="nlinks">
+      <span class="nl on"><i class="ti ti-compass" aria-hidden="true"></i>Discover</span>
+      <span class="nl"><i class="ti ti-heart" aria-hidden="true"></i>Matches</span>
+      <span class="nl"><i class="ti ti-message" aria-hidden="true"></i>Messages</span>
+    </div>
+    <div class="nacts">
+      <div class="nibtn dot" aria-label="Notifications"><i class="ti ti-bell" aria-hidden="true"></i></div>
+      <div class="nibtn" aria-label="Search"><i class="ti ti-search" aria-hidden="true"></i></div>
+      <div class="nav-av">RK</div>
+    </div>
+  </div>
+  <div class="disc-shell">
+    <div class="sb">
+      <div class="sb-logo"><div class="sb-ln">Thunai</div><span class="sb-lt">துணை · Companion</span></div>
+
+      <!-- mini kolam in sidebar -->
+      <div style="display:flex;justify-content:center;padding:10px 0 6px;border-bottom:1px solid var(--cream3);">
+        <svg width="44" height="44" viewBox="0 0 44 44" role="img" aria-hidden="true"><title></title>
+          <g transform="translate(22,22)">
+            <circle r="18" fill="none" stroke="#C4870C" stroke-width=".8" stroke-dasharray="3 3"/>
+            <circle r="11" fill="none" stroke="#B5334A" stroke-width=".8"/>
+            <circle r="4" fill="none" stroke="#C4870C" stroke-width=".8"/>
+            <circle r="1.5" fill="#C4870C"/>
+            <circle cx="0" cy="-18" r="2" fill="#B5334A"/><circle cx="0" cy="18" r="2" fill="#B5334A"/>
+            <circle cx="-18" cy="0" r="2" fill="#B5334A"/><circle cx="18" cy="0" r="2" fill="#B5334A"/>
+            <circle cx="13" cy="-13" r="1.5" fill="#C4870C"/><circle cx="-13" cy="-13" r="1.5" fill="#C4870C"/>
+            <circle cx="13" cy="13" r="1.5" fill="#C4870C"/><circle cx="-13" cy="13" r="1.5" fill="#C4870C"/>
+            <line x1="0" y1="-11" x2="0" y2="-18" stroke="#C4870C" stroke-width=".7"/>
+            <line x1="0" y1="11" x2="0" y2="18" stroke="#C4870C" stroke-width=".7"/>
+            <line x1="-11" y1="0" x2="-18" y2="0" stroke="#C4870C" stroke-width=".7"/>
+            <line x1="11" y1="0" x2="18" y2="0" stroke="#C4870C" stroke-width=".7"/>
+          </g>
+        </svg>
+      </div>
+
+      <div class="sb-sect">Main</div>
+      <div class="sb-nav">
+        <div class="sbi on"><i class="ti ti-compass" aria-hidden="true"></i>Discover</div>
+        <div class="sbi"><i class="ti ti-heart" aria-hidden="true"></i>Matches<span class="pip">3</span></div>
+        <div class="sbi"><i class="ti ti-message" aria-hidden="true"></i>Messages<span class="pip">1</span></div>
+        <div class="sbi"><i class="ti ti-bookmark" aria-hidden="true"></i>Saved</div>
+        <div class="sbi"><i class="ti ti-users" aria-hidden="true"></i>Community</div>
+      </div>
+      <div class="sb-sect">Account</div>
+      <div class="sb-nav" style="padding-top:0;">
+        <div class="sbi"><i class="ti ti-adjustments-horizontal" aria-hidden="true"></i>Preferences</div>
+        <div class="sbi"><i class="ti ti-user-circle" aria-hidden="true"></i>My profile</div>
+        <div class="sbi"><i class="ti ti-settings" aria-hidden="true"></i>Settings</div>
+      </div>
+      <div class="sb-user">
+        <div class="sb-uav">RK</div>
+        <div><div class="sb-un">Rajan K.</div><div class="sb-us"><i class="ti ti-circle-check" aria-hidden="true"></i>Profile complete</div></div>
+      </div>
+    </div>
+
+    <div class="feed-main">
+      <div class="feed-hdr">
+        <div>
+          <div class="feed-ttl">Discover companions</div>
+          <div class="feed-sub"><i class="ti ti-sparkles" aria-hidden="true"></i>Sorted by shared interests</div>
+        </div>
+        <div class="feed-sort"><i class="ti ti-adjustments-horizontal" aria-hidden="true"></i>Filters</div>
+      </div>
+      <div class="chips">
+        <span class="chip on"><i class="ti ti-sparkles" aria-hidden="true"></i>Shared interests</span>
+        <span class="chip"><i class="ti ti-map-pin" aria-hidden="true"></i>Near me</span>
+        <span class="chip"><i class="ti ti-clock" aria-hidden="true"></i>New profiles</span>
+        <span class="chip"><i class="ti ti-heart" aria-hidden="true"></i>Values match</span>
+        <span class="chip"><i class="ti ti-world" aria-hidden="true"></i>Diaspora</span>
+        <span class="chip"><i class="ti ti-certificate" aria-hidden="true"></i>Verified only</span>
+      </div>
+      <div class="cgrid">
+
+        <div class="pc">
+          <div class="pci pci-1">
+            <div class="pc-av"><i class="ti ti-user-circle" aria-hidden="true"></i></div>
+            <div class="pc-vb"><div class="pc-vd"></div><i class="ti ti-shield-check" style="font-size:10px;color:var(--sage);" aria-hidden="true"></i>ID Verified</div>
+            <div class="pc-loc"><i class="ti ti-map-pin" aria-hidden="true"></i>Melbourne, AU</div>
+            <button class="pc-save" aria-label="Save profile"><i class="ti ti-bookmark" aria-hidden="true"></i></button>
+          </div>
+          <div class="pc-body">
+            <div class="pc-nr"><span class="pc-name">Kavitha</span><span class="pc-age">27 yrs</span></div>
+            <div class="pc-meta"><i class="ti ti-stethoscope" aria-hidden="true"></i>Physiotherapist<span style="color:var(--amber);margin:0 3px;">·</span><i class="ti ti-map-2" aria-hidden="true"></i>Jaffna roots</div>
+            <div class="pc-shared">
+              <div class="pc-st"><i class="ti ti-sparkles" aria-hidden="true"></i>You both love</div>
+              <div class="pc-tags"><span class="pc-tag">Ilaiyaraaja</span><span class="pc-tag">Hiking</span><span class="pc-tag">Diaspora</span></div>
+            </div>
+            <div class="pc-acts">
+              <button class="btn-pass"><i class="ti ti-x" aria-hidden="true"></i>Pass</button>
+              <button class="btn-conn"><i class="ti ti-send" aria-hidden="true"></i>Connect</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="pc">
+          <div class="pci pci-2">
+            <div class="pc-av"><i class="ti ti-user-circle" aria-hidden="true"></i></div>
+            <div class="pc-vb"><div class="pc-vd"></div>Verified</div>
+            <div class="pc-loc"><i class="ti ti-map-pin" aria-hidden="true"></i>London, UK</div>
+            <button class="pc-save" aria-label="Save profile"><i class="ti ti-bookmark" aria-hidden="true"></i></button>
+          </div>
+          <div class="pc-body">
+            <div class="pc-nr"><span class="pc-name">Anushya</span><span class="pc-age">29 yrs</span></div>
+            <div class="pc-meta"><i class="ti ti-palette" aria-hidden="true"></i>UX Designer<span style="color:var(--amber);margin:0 3px;">·</span><i class="ti ti-map-2" aria-hidden="true"></i>Colombo roots</div>
+            <div class="pc-shared">
+              <div class="pc-st"><i class="ti ti-sparkles" aria-hidden="true"></i>You both love</div>
+              <div class="pc-tags"><span class="pc-tag">Home Cooking</span><span class="pc-tag">Tech &amp; Design</span></div>
+            </div>
+            <div class="pc-acts">
+              <button class="btn-pass"><i class="ti ti-x" aria-hidden="true"></i>Pass</button>
+              <button class="btn-conn"><i class="ti ti-send" aria-hidden="true"></i>Connect</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="pc">
+          <div class="pci pci-3">
+            <div class="pc-av"><i class="ti ti-user-circle" aria-hidden="true"></i></div>
+            <div class="pc-vb"><div class="pc-vd"></div><i class="ti ti-shield-check" style="font-size:10px;color:var(--sage);" aria-hidden="true"></i>ID Verified</div>
+            <div class="pc-loc"><i class="ti ti-map-pin" aria-hidden="true"></i>Toronto, CA</div>
+            <button class="pc-save" aria-label="Save profile"><i class="ti ti-bookmark" aria-hidden="true"></i></button>
+          </div>
+          <div class="pc-body">
+            <div class="pc-nr"><span class="pc-name">Thiviya</span><span class="pc-age">26 yrs</span></div>
+            <div class="pc-meta"><i class="ti ti-writing" aria-hidden="true"></i>Journalist<span style="color:var(--amber);margin:0 3px;">·</span><i class="ti ti-map-2" aria-hidden="true"></i>Vavuniya roots</div>
+            <div class="pc-shared">
+              <div class="pc-st"><i class="ti ti-sparkles" aria-hidden="true"></i>You both love</div>
+              <div class="pc-tags"><span class="pc-tag">Tamil Literature</span><span class="pc-tag">World Travel</span></div>
+            </div>
+            <div class="pc-acts">
+              <button class="btn-pass"><i class="ti ti-x" aria-hidden="true"></i>Pass</button>
+              <button class="btn-conn"><i class="ti ti-send" aria-hidden="true"></i>Connect</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="pc">
+          <div class="pci pci-4">
+            <div class="pc-av"><i class="ti ti-user-circle" aria-hidden="true"></i></div>
+            <div class="pc-vb"><div class="pc-vd"></div>Verified</div>
+            <div class="pc-loc"><i class="ti ti-map-pin" aria-hidden="true"></i>Sydney, AU</div>
+            <button class="pc-save" aria-label="Save profile"><i class="ti ti-bookmark" aria-hidden="true"></i></button>
+          </div>
+          <div class="pc-body">
+            <div class="pc-nr"><span class="pc-name">Meena</span><span class="pc-age">31 yrs</span></div>
+            <div class="pc-meta"><i class="ti ti-building" aria-hidden="true"></i>Architect<span style="color:var(--amber);margin:0 3px;">·</span><i class="ti ti-map-2" aria-hidden="true"></i>Batticaloa roots</div>
+            <div class="pc-shared">
+              <div class="pc-st"><i class="ti ti-sparkles" aria-hidden="true"></i>You both love</div>
+              <div class="pc-tags"><span class="pc-tag">Hiking</span><span class="pc-tag">Sustainability</span></div>
+            </div>
+            <div class="pc-acts">
+              <button class="btn-pass"><i class="ti ti-x" aria-hidden="true"></i>Pass</button>
+              <button class="btn-conn"><i class="ti ti-send" aria-hidden="true"></i>Connect</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="rp">
+      <div class="rp-sec">
+        <div class="rp-t"><i class="ti ti-trophy" aria-hidden="true"></i>Top matches</div>
+        <div class="match-row">
+          <div class="m-av m1"><i class="ti ti-user-circle" aria-hidden="true"></i></div>
+          <div style="flex:1;min-width:0;">
+            <div class="m-name">Kavitha R.</div>
+            <div class="m-sh"><i class="ti ti-sparkles" aria-hidden="true"></i>Ilaiyaraaja · Hiking · Diaspora</div>
+          </div>
+          <div class="m-pct">78%</div>
+        </div>
+        <div class="match-row">
+          <div class="m-av m2"><i class="ti ti-user-circle" aria-hidden="true"></i></div>
+          <div style="flex:1;min-width:0;">
+            <div class="m-name">Anushya M.</div>
+            <div class="m-sh"><i class="ti ti-sparkles" aria-hidden="true"></i>Home Cooking · Tech</div>
+          </div>
+          <div class="m-pct">64%</div>
+        </div>
+        <div class="match-row">
+          <div class="m-av m3"><i class="ti ti-user-circle" aria-hidden="true"></i></div>
+          <div style="flex:1;min-width:0;">
+            <div class="m-name">Thiviya S.</div>
+            <div class="m-sh"><i class="ti ti-sparkles" aria-hidden="true"></i>Tamil Lit · Travel</div>
+          </div>
+          <div class="m-pct">61%</div>
+        </div>
+      </div>
+
+      <div class="rp-sec">
+        <div class="rp-t"><i class="ti ti-activity" aria-hidden="true"></i>Recent activity</div>
+        <div class="act-list">
+          <div class="act">
+            <div class="act-ic ai-sage"><i class="ti ti-circle-check" aria-hidden="true"></i></div>
+            <div><div class="act-tx"><strong>Kavitha</strong> accepted your request</div><div class="act-tm"><i class="ti ti-clock" aria-hidden="true"></i>2 hours ago</div></div>
+          </div>
+          <div class="act">
+            <div class="act-ic ai-rose"><i class="ti ti-heart" aria-hidden="true"></i></div>
+            <div><div class="act-tx"><strong>Anushya</strong> liked your profile</div><div class="act-tm"><i class="ti ti-clock" aria-hidden="true"></i>Yesterday</div></div>
+          </div>
+          <div class="act">
+            <div class="act-ic ai-amber"><i class="ti ti-sparkles" aria-hidden="true"></i></div>
+            <div><div class="act-tx">3 new interest matches today</div><div class="act-tm"><i class="ti ti-clock" aria-hidden="true"></i>9:41 AM</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rp-sec">
+        <div class="rp-t"><i class="ti ti-adjustments-horizontal" aria-hidden="true"></i>My preferences</div>
+        <div class="pref-row"><span class="pref-l"><i class="ti ti-calendar" aria-hidden="true"></i>Age range</span><span class="pref-v">24 – 34</span></div>
+        <div class="pref-row"><span class="pref-l"><i class="ti ti-world" aria-hidden="true"></i>Location</span><span class="pref-v">Global</span></div>
+        <div class="pref-row"><span class="pref-l"><i class="ti ti-heart" aria-hidden="true"></i>Interest weight</span><span class="pref-v">High</span></div>
+        <div class="pref-row"><span class="pref-l"><i class="ti ti-shield-check" aria-hidden="true"></i>Verified only</span><span class="pref-v">On</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════
+     PROFILE VIEW
+══════════════════════════════ -->
+<div class="scr" id="s-prof">
+  <div class="nav">
+    <div class="nlogo">Thunai <span class="nlogo-sub">துணை</span></div>
+    <div class="nlinks">
+      <span class="nl"><i class="ti ti-compass" aria-hidden="true"></i>Discover</span>
+      <span class="nl on"><i class="ti ti-user-circle" aria-hidden="true"></i>Profile</span>
+    </div>
+    <div class="nacts">
+      <div class="nibtn dot"><i class="ti ti-bell" aria-hidden="true"></i></div>
+      <div class="nibtn"><i class="ti ti-search" aria-hidden="true"></i></div>
+      <div class="nav-av">RK</div>
+    </div>
+  </div>
+  <div class="pv-shell">
+    <div class="sb">
+      <div class="sb-logo"><div class="sb-ln">Thunai</div><span class="sb-lt">துணை · Companion</span></div>
+      <div style="display:flex;justify-content:center;padding:10px 0 6px;border-bottom:1px solid var(--cream3);">
+        <svg width="44" height="44" viewBox="0 0 44 44" role="img" aria-hidden="true"><title></title>
+          <g transform="translate(22,22)">
+            <circle r="18" fill="none" stroke="#C4870C" stroke-width=".8" stroke-dasharray="3 3"/>
+            <circle r="11" fill="none" stroke="#B5334A" stroke-width=".8"/>
+            <circle r="4" fill="none" stroke="#C4870C" stroke-width=".8"/>
+            <circle r="1.5" fill="#C4870C"/>
+            <circle cx="0" cy="-18" r="2" fill="#B5334A"/><circle cx="0" cy="18" r="2" fill="#B5334A"/>
+            <circle cx="-18" cy="0" r="2" fill="#B5334A"/><circle cx="18" cy="0" r="2" fill="#B5334A"/>
+            <circle cx="13" cy="-13" r="1.5" fill="#C4870C"/><circle cx="-13" cy="-13" r="1.5" fill="#C4870C"/>
+            <circle cx="13" cy="13" r="1.5" fill="#C4870C"/><circle cx="-13" cy="13" r="1.5" fill="#C4870C"/>
+            <line x1="0" y1="-11" x2="0" y2="-18" stroke="#C4870C" stroke-width=".7"/>
+            <line x1="0" y1="11" x2="0" y2="18" stroke="#C4870C" stroke-width=".7"/>
+            <line x1="-11" y1="0" x2="-18" y2="0" stroke="#C4870C" stroke-width=".7"/>
+            <line x1="11" y1="0" x2="18" y2="0" stroke="#C4870C" stroke-width=".7"/>
+          </g>
+        </svg>
+      </div>
+      <div class="sb-sect">Main</div>
+      <div class="sb-nav">
+        <div class="sbi"><i class="ti ti-compass" aria-hidden="true"></i>Discover</div>
+        <div class="sbi"><i class="ti ti-heart" aria-hidden="true"></i>Matches<span class="pip">3</span></div>
+        <div class="sbi"><i class="ti ti-message" aria-hidden="true"></i>Messages</div>
+        <div class="sbi"><i class="ti ti-bookmark" aria-hidden="true"></i>Saved</div>
+      </div>
+      <div class="sb-sect">Account</div>
+      <div class="sb-nav" style="padding-top:0;">
+        <div class="sbi"><i class="ti ti-adjustments-horizontal" aria-hidden="true"></i>Preferences</div>
+        <div class="sbi on"><i class="ti ti-user-circle" aria-hidden="true"></i>My profile</div>
+        <div class="sbi"><i class="ti ti-settings" aria-hidden="true"></i>Settings</div>
+      </div>
+      <div class="sb-user">
+        <div class="sb-uav">RK</div>
+        <div><div class="sb-un">Rajan K.</div><div class="sb-us"><i class="ti ti-circle-check" aria-hidden="true"></i>Profile complete</div></div>
+      </div>
+    </div>
+
+    <div class="pv-main">
+      <div class="pv-hero">
+        <!-- Kolam watermark inside hero -->
+        <div class="pv-kolam-bg">
+          <svg width="180" height="180" viewBox="0 0 180 180" role="img" aria-hidden="true"><title></title>
+            <g transform="translate(90,90)">
+              <circle r="70" fill="none" stroke="#C4870C" stroke-width="1" stroke-dasharray="4 4"/>
+              <circle r="52" fill="none" stroke="#B5334A" stroke-width=".8" stroke-dasharray="3 3"/>
+              <circle r="34" fill="none" stroke="#C4870C" stroke-width=".8"/>
+              <circle r="16" fill="none" stroke="#B5334A" stroke-width=".8"/>
+              <circle r="4" fill="#C4870C"/>
+              <circle cx="0" cy="-70" r="3" fill="#B5334A"/><circle cx="0" cy="70" r="3" fill="#B5334A"/>
+              <circle cx="-70" cy="0" r="3" fill="#B5334A"/><circle cx="70" cy="0" r="3" fill="#B5334A"/>
+              <circle cx="50" cy="-50" r="2.5" fill="#C4870C"/><circle cx="-50" cy="-50" r="2.5" fill="#C4870C"/>
+              <circle cx="50" cy="50" r="2.5" fill="#C4870C"/><circle cx="-50" cy="50" r="2.5" fill="#C4870C"/>
+              <line x1="0" y1="-34" x2="0" y2="-52" stroke="#C4870C" stroke-width=".8"/>
+              <line x1="0" y1="34" x2="0" y2="52" stroke="#C4870C" stroke-width=".8"/>
+              <line x1="-34" y1="0" x2="-52" y2="0" stroke="#C4870C" stroke-width=".8"/>
+              <line x1="34" y1="0" x2="52" y2="0" stroke="#C4870C" stroke-width=".8"/>
+            </g>
+          </svg>
+        </div>
+        <div class="pv-bg-i"><i class="ti ti-user-circle" aria-hidden="true"></i></div>
+        <div class="pv-overlay"></div>
+        <div class="pv-toprow">
+          <button class="pv-tbtn" aria-label="Go back"><i class="ti ti-arrow-left" aria-hidden="true"></i></button>
+          <div class="pv-tbtn-row">
+            <button class="pv-tbtn" aria-label="Share profile"><i class="ti ti-share" aria-hidden="true"></i></button>
+            <button class="pv-tbtn" aria-label="More options"><i class="ti ti-dots" aria-hidden="true"></i></button>
+          </div>
+        </div>
+        <div class="pv-strip">
+          <div class="pv-vbadge"><i class="ti ti-shield-check" aria-hidden="true"></i><div class="pv-vdot"></div>Photo + ID Verified</div>
+          <div class="pv-hero-acts">
+            <button class="pv-hbtn pv-ghost"><i class="ti ti-bookmark" aria-hidden="true"></i>Save</button>
+            <button class="pv-hbtn pv-pri"><i class="ti ti-send" aria-hidden="true"></i>Send request</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="pv-content">
+        <div class="pv-hdr">
+          <div>
+            <div class="pv-name">Kavitha R.<span class="pv-tamil">கவிதா</span></div>
+            <div class="pv-mline">
+              <i class="ti ti-calendar" aria-hidden="true"></i>27 years
+              <span class="pv-dot">·</span>
+              <i class="ti ti-map-pin" aria-hidden="true"></i>Melbourne, AU
+              <span class="pv-dot">·</span>
+              <i class="ti ti-stethoscope" aria-hidden="true"></i>Physiotherapist
+            </div>
+            <div class="pv-mline" style="margin-top:5px;">
+              <i class="ti ti-map-2" aria-hidden="true"></i>Jaffna roots
+              <span class="pv-dot">·</span>
+              <i class="ti ti-flame" aria-hidden="true"></i>Hindu · flexible
+              <span class="pv-dot">·</span>
+              <i class="ti ti-plane" aria-hidden="true"></i>Open to relocate
+            </div>
+          </div>
+          <div class="ring-wrap">
+            <div class="ring"><div class="ring-in"><span class="ring-pct">78%</span><span class="ring-lbl">match</span></div></div>
+            <div style="font-size:9px;color:var(--ink3);margin-top:4px;">Compatibility</div>
+          </div>
+        </div>
+
+        <div class="pv-shared-banner">
+          <div class="pvs-t"><i class="ti ti-sparkles" aria-hidden="true"></i>Shared with you</div>
+          <div class="pvtags">
+            <span class="pvtag sh"><i class="ti ti-music" aria-hidden="true"></i>Ilaiyaraaja</span>
+            <span class="pvtag sh"><i class="ti ti-mountain" aria-hidden="true"></i>Hiking</span>
+            <span class="pvtag sh"><i class="ti ti-world" aria-hidden="true"></i>Diaspora identity</span>
+          </div>
+        </div>
+
+        <div class="pv-grid">
+          <div>
+            <div class="sec-t"><i class="ti ti-heart" aria-hidden="true"></i>All interests</div>
+            <div class="pvtags">
+              <span class="pvtag sh"><i class="ti ti-music" aria-hidden="true"></i>Ilaiyaraaja</span>
+              <span class="pvtag sh"><i class="ti ti-mountain" aria-hidden="true"></i>Hiking</span>
+              <span class="pvtag sh"><i class="ti ti-world" aria-hidden="true"></i>Diaspora</span>
+              <span class="pvtag"><i class="ti ti-soup" aria-hidden="true"></i>Home Cooking</span>
+              <span class="pvtag"><i class="ti ti-book" aria-hidden="true"></i>Tamil Literature</span>
+              <span class="pvtag"><i class="ti ti-star" aria-hidden="true"></i>Classical Dance</span>
+              <span class="pvtag"><i class="ti ti-leaf" aria-hidden="true"></i>Sustainability</span>
+              <span class="pvtag"><i class="ti ti-yoga" aria-hidden="true"></i>Wellness</span>
+            </div>
+          </div>
+          <div>
+            <div class="sec-t"><i class="ti ti-list-check" aria-hidden="true"></i>Core values</div>
+            <div class="pv-vals">
+              <div class="pv-val"><div class="pv-vl"><i class="ti ti-home" aria-hidden="true"></i>Family</div><div class="pv-vv">Very family-led</div></div>
+              <div class="pv-val"><div class="pv-vl"><i class="ti ti-map-2" aria-hidden="true"></i>Cultural roots</div><div class="pv-vv">Strongly tied</div></div>
+              <div class="pv-val"><div class="pv-vl"><i class="ti ti-plane" aria-hidden="true"></i>Settling goal</div><div class="pv-vv">Open to reloc.</div></div>
+              <div class="pv-val"><div class="pv-vl"><i class="ti ti-flame" aria-hidden="true"></i>Religion</div><div class="pv-vv">Hindu · flexible</div></div>
+            </div>
+          </div>
+          <div class="pv-about">
+            <div class="sec-t"><i class="ti ti-user" aria-hidden="true"></i>About Kavitha</div>
+            <p style="font-size:12px;color:var(--ink2);line-height:1.8;">Physio by day, trail runner on weekends. Grew up between Jaffna and Melbourne — both identities feel like home. I believe conversations over coffee matter more than a checklist. Looking for someone as comfortable at a Carnatic concert as on a mountain trail.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pv-rp">
+      <div class="act-stack">
+        <button class="pvbtn pri"><i class="ti ti-send" aria-hidden="true"></i>Send connection request</button>
+        <button class="pvbtn sec"><i class="ti ti-bookmark" aria-hidden="true"></i>Save to shortlist</button>
+        <button class="pvbtn sec"><i class="ti ti-message" aria-hidden="true"></i>Send a note first</button>
+        <button class="pvbtn sec"><i class="ti ti-flag" aria-hidden="true"></i>Report profile</button>
+      </div>
+
+      <div class="safety-block">
+        <div class="sc-t"><i class="ti ti-shield-check" aria-hidden="true"></i>Safety &amp; verification</div>
+        <div class="sc-item"><div class="ck"><i class="ti ti-check" aria-hidden="true"></i></div>Photo verified by Thunai team</div>
+        <div class="sc-item"><div class="ck"><i class="ti ti-check" aria-hidden="true"></i></div>Government ID confirmed</div>
+        <div class="sc-item"><div class="ck"><i class="ti ti-check" aria-hidden="true"></i></div>Community reference checked</div>
+        <div class="sc-item"><div class="ck"><i class="ti ti-check" aria-hidden="true"></i></div>Active within last 7 days</div>
+      </div>
+
+      <div class="rp-sec">
+        <div class="rp-t"><i class="ti ti-chart-bar" aria-hidden="true"></i>Quick stats</div>
+        <div class="qs-row"><span class="qs-l"><i class="ti ti-message-reply" aria-hidden="true"></i>Response rate</span><span class="qs-v qv-sage">High</span></div>
+        <div class="qs-row"><span class="qs-l"><i class="ti ti-calendar-plus" aria-hidden="true"></i>Joined</span><span class="qs-v">March 2025</span></div>
+        <div class="qs-row"><span class="qs-l"><i class="ti ti-clock" aria-hidden="true"></i>Last active</span><span class="qs-v">2 days ago</span></div>
+        <div class="qs-row"><span class="qs-l"><i class="ti ti-sparkles" aria-hidden="true"></i>Shared interests</span><span class="qs-v qv-rose">3 of 8</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+function sw(id,btn){
+  ['land','disc','prof'].forEach(s=>{
+    document.getElementById('s-'+s).className='scr';
+  });
+  document.getElementById('s-'+id).className='scr on';
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  btn.classList.add('on');
+}
+</script>

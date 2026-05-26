@@ -1,0 +1,1254 @@
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&family=Noto+Sans+Tamil:wght@400;500&display=swap');
+
+  :root {
+    --maroon: #6B1A2A;
+    --maroon-deep: #4A0F1B;
+    --maroon-mid: #8B2438;
+    --crimson: #C1293F;
+    --crimson-light: #E8455A;
+    --gold: #C9972A;
+    --gold-light: #E8B84B;
+    --gold-pale: #F5E6C0;
+    --cream: #FAF6EE;
+    --cream-dark: #F0E8D8;
+    --warm-white: #FDFAF5;
+    --text-dark: #1C0A0E;
+    --text-mid: #4A2530;
+    --text-muted: #8B6570;
+    --text-light: #B89AA2;
+    --verified-teal: #0F7B6C;
+    --card-bg: #FFFFFF;
+    --surface: #FAF6EE;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body, .w-root {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .w-root {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem 0.5rem 2rem;
+    gap: 2rem;
+    background: var(--cream);
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-align: center;
+    width: 100%;
+    padding: 0 1rem;
+  }
+
+  .phone-frame {
+    width: 340px;
+    background: var(--card-bg);
+    border-radius: 36px;
+    overflow: hidden;
+    border: 1px solid rgba(107,26,42,0.15);
+    box-shadow: 0 2px 24px rgba(107,26,42,0.1), 0 0 0 6px rgba(201,151,42,0.08);
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .phone-status {
+    background: var(--maroon-deep);
+    padding: 10px 24px 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .phone-status .time { color: rgba(255,255,255,0.9); font-size: 13px; font-weight: 500; }
+  .phone-status .icons { display: flex; gap: 5px; align-items: center; }
+  .phone-status .icons span { color: rgba(255,255,255,0.8); font-size: 10px; }
+
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  /* ── SCREEN NAV TABS ── */
+  .screen-tabs {
+    display: flex;
+    gap: 6px;
+    background: rgba(107,26,42,0.06);
+    border-radius: 12px;
+    padding: 4px;
+    width: 340px;
+  }
+  .screen-tab {
+    flex: 1;
+    padding: 7px 4px;
+    border: none;
+    background: transparent;
+    border-radius: 8px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+  }
+  .screen-tab.active {
+    background: var(--maroon);
+    color: #fff;
+  }
+
+  /* ══════════════════════════
+     SCREEN 1 — ONBOARDING
+  ══════════════════════════ */
+  .ob-header {
+    background: linear-gradient(160deg, var(--maroon-deep) 0%, var(--maroon) 60%, #9B2D42 100%);
+    padding: 28px 24px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .ob-header::before {
+    content: '';
+    position: absolute;
+    top: -20px; right: -20px;
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    background: rgba(201,151,42,0.12);
+  }
+  .ob-header::after {
+    content: '';
+    position: absolute;
+    bottom: -30px; left: -10px;
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    background: rgba(201,151,42,0.08);
+  }
+  .ob-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--gold-light);
+    line-height: 1;
+    letter-spacing: 0.02em;
+  }
+  .ob-logo-tamil {
+    font-family: 'Noto Sans Tamil', sans-serif;
+    font-size: 13px;
+    color: rgba(232,184,75,0.7);
+    margin-top: 2px;
+    display: block;
+  }
+  .ob-step-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 20px;
+  }
+  .ob-step-dot {
+    width: 22px; height: 4px;
+    border-radius: 2px;
+    background: rgba(255,255,255,0.25);
+    transition: background 0.3s;
+  }
+  .ob-step-dot.done { background: var(--gold-light); }
+  .ob-step-dot.active { background: #fff; width: 32px; }
+  .ob-step-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.6);
+    margin-left: auto;
+  }
+
+  .ob-body {
+    padding: 24px 20px 16px;
+    background: var(--warm-white);
+  }
+  .ob-q {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--maroon-deep);
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+  .ob-sub {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+
+  .interest-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .interest-chip {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: 1.5px solid var(--cream-dark);
+    background: var(--cream);
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .interest-chip::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--maroon);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .interest-chip.sel {
+    border-color: var(--maroon);
+    background: #fff;
+  }
+  .interest-chip.sel::before { opacity: 0.04; }
+  .interest-chip.sel .ic-label { color: var(--maroon-deep); font-weight: 500; }
+  .interest-chip.sel .ic-check { opacity: 1; }
+  .ic-emoji { font-size: 18px; position: relative; z-index: 1; }
+  .ic-label {
+    font-size: 12px;
+    color: var(--text-mid);
+    line-height: 1.3;
+    position: relative;
+    z-index: 1;
+    flex: 1;
+  }
+  .ic-check {
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: var(--maroon);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s;
+    position: relative; z-index: 1;
+    flex-shrink: 0;
+  }
+  .ic-check::after {
+    content: '✓';
+    color: #fff;
+    font-size: 9px;
+    font-weight: 600;
+  }
+
+  .ob-cta {
+    width: 100%;
+    padding: 14px;
+    background: var(--maroon);
+    border: none;
+    border-radius: 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    position: relative;
+    overflow: hidden;
+  }
+  .ob-cta-gold {
+    background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+    color: var(--maroon-deep);
+    font-weight: 600;
+  }
+  .ob-cta::after {
+    content: '→';
+    font-size: 16px;
+  }
+
+  /* ══════════════════════════
+     SCREEN 2 — DISCOVERY FEED
+  ══════════════════════════ */
+  .feed-header {
+    background: var(--warm-white);
+    padding: 16px 20px 12px;
+    border-bottom: 1px solid rgba(107,26,42,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .feed-logo-sm {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--maroon-deep);
+    letter-spacing: 0.02em;
+  }
+  .feed-logo-sm span {
+    font-family: 'Noto Sans Tamil', sans-serif;
+    font-size: 10px;
+    color: var(--gold);
+    display: block;
+    line-height: 1;
+  }
+  .feed-icons { display: flex; gap: 14px; }
+  .feed-icon-btn {
+    width: 34px; height: 34px;
+    border-radius: 10px;
+    background: var(--cream);
+    border: 1px solid rgba(107,26,42,0.1);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    color: var(--text-mid);
+    font-size: 16px;
+  }
+  .feed-icon-btn.notif { position: relative; }
+  .feed-icon-btn.notif::after {
+    content: '';
+    position: absolute;
+    top: 6px; right: 6px;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--crimson);
+    border: 1.5px solid var(--warm-white);
+  }
+
+  .feed-filter-row {
+    padding: 10px 16px;
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    background: var(--warm-white);
+    border-bottom: 1px solid rgba(107,26,42,0.06);
+  }
+  .feed-filter-row::-webkit-scrollbar { display: none; }
+  .f-chip {
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 1px solid var(--cream-dark);
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+    white-space: nowrap;
+    cursor: pointer;
+    background: var(--cream);
+    flex-shrink: 0;
+  }
+  .f-chip.active {
+    background: var(--maroon);
+    border-color: var(--maroon);
+    color: #fff;
+  }
+
+  .feed-scroll {
+    background: #F4EDE2;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    max-height: 460px;
+    overflow-y: auto;
+  }
+  .feed-scroll::-webkit-scrollbar { display: none; }
+
+  .profile-card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid rgba(107,26,42,0.08);
+  }
+
+  .pc-img-wrap {
+    position: relative;
+    height: 170px;
+    background: linear-gradient(135deg, var(--cream-dark) 0%, #E8D5C0 100%);
+    overflow: hidden;
+  }
+  .pc-avatar {
+    width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 56px;
+    opacity: 0.6;
+  }
+  .pc-verified {
+    position: absolute;
+    top: 10px; right: 10px;
+    background: rgba(255,255,255,0.92);
+    border-radius: 20px;
+    padding: 3px 8px 3px 5px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--verified-teal);
+    border: 1px solid rgba(15,123,108,0.2);
+  }
+  .pc-verified-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--verified-teal);
+  }
+  .pc-location-badge {
+    position: absolute;
+    bottom: 10px; left: 10px;
+    background: rgba(28,10,14,0.65);
+    color: rgba(255,255,255,0.9);
+    border-radius: 20px;
+    padding: 3px 10px;
+    font-size: 10px;
+    backdrop-filter: blur(4px);
+  }
+  .pc-like-btn {
+    position: absolute;
+    bottom: 10px; right: 10px;
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.92);
+    border: none;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .pc-body {
+    padding: 14px 16px 16px;
+  }
+  .pc-name-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 3px;
+  }
+  .pc-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--maroon-deep);
+    letter-spacing: 0.01em;
+  }
+  .pc-age {
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+  .pc-meta {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .pc-meta-dot { color: var(--gold); }
+
+  .shared-block {
+    background: linear-gradient(135deg, #FFF8EC 0%, #FFF3DE 100%);
+    border: 1px solid rgba(201,151,42,0.25);
+    border-radius: 10px;
+    padding: 8px 11px;
+    margin-bottom: 11px;
+  }
+  .shared-title {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .shared-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  .shared-tag {
+    font-size: 11px;
+    background: rgba(201,151,42,0.12);
+    color: var(--maroon-deep);
+    border-radius: 20px;
+    padding: 3px 9px;
+    font-weight: 500;
+  }
+
+  .pc-actions {
+    display: flex;
+    gap: 8px;
+  }
+  .pc-btn-pass {
+    flex: 1;
+    padding: 10px;
+    border-radius: 12px;
+    border: 1.5px solid var(--cream-dark);
+    background: transparent;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    cursor: pointer;
+  }
+  .pc-btn-connect {
+    flex: 2;
+    padding: 10px;
+    border-radius: 12px;
+    border: none;
+    background: var(--maroon);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+  }
+
+  /* ══════════════════════════
+     SCREEN 3 — PROFILE VIEW
+  ══════════════════════════ */
+  .pv-hero {
+    height: 220px;
+    background: linear-gradient(160deg, var(--cream-dark) 0%, #DFD0BC 100%);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .pv-avatar { font-size: 80px; opacity: 0.55; }
+  .pv-back {
+    position: absolute;
+    top: 48px; left: 16px;
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.88);
+    border: none;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    cursor: pointer;
+    color: var(--maroon-deep);
+  }
+  .pv-more {
+    position: absolute;
+    top: 48px; right: 16px;
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.88);
+    border: none;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    cursor: pointer;
+    color: var(--maroon-deep);
+  }
+  .pv-verified-strip {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 8px 16px;
+    background: linear-gradient(transparent, rgba(28,10,14,0.55));
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .pv-ver-badge {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(15,123,108,0.9);
+    border-radius: 20px;
+    padding: 4px 10px;
+    font-size: 10px;
+    font-weight: 500;
+    color: #fff;
+  }
+  .pv-ver-dot { width: 6px; height: 6px; border-radius: 50%; background: #6EE7B7; }
+
+  .pv-body {
+    background: var(--warm-white);
+    padding: 0 20px 20px;
+  }
+  .pv-name-block {
+    padding: 18px 0 12px;
+    border-bottom: 1px solid rgba(107,26,42,0.08);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+  .pv-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--maroon-deep);
+    line-height: 1.1;
+  }
+  .pv-tamil-name {
+    font-family: 'Noto Sans Tamil', sans-serif;
+    font-size: 13px;
+    color: var(--gold);
+    margin-top: 3px;
+    display: block;
+  }
+  .pv-age-loc {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 4px;
+  }
+  .pv-compat-ring {
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    background: conic-gradient(var(--maroon) 0% 78%, var(--cream-dark) 78% 100%);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+  }
+  .pv-compat-inner {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: var(--warm-white);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--maroon-deep);
+    flex-direction: column;
+    line-height: 1;
+  }
+  .pv-compat-label { font-size: 8px; color: var(--text-muted); font-weight: 400; }
+
+  .pv-section { padding: 14px 0; border-bottom: 1px solid rgba(107,26,42,0.06); }
+  .pv-section:last-child { border-bottom: none; }
+  .pv-section-title {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .pv-section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(201,151,42,0.2);
+  }
+
+  .pv-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .pv-tag {
+    padding: 5px 12px;
+    border-radius: 20px;
+    background: var(--cream);
+    border: 1px solid rgba(107,26,42,0.1);
+    font-size: 12px;
+    color: var(--text-mid);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .pv-tag.shared {
+    background: linear-gradient(135deg, #FFF8EC, #FFF3DE);
+    border-color: rgba(201,151,42,0.3);
+    color: var(--maroon-deep);
+    font-weight: 500;
+  }
+  .pv-tag.shared::before { content: '✦'; color: var(--gold); font-size: 8px; }
+
+  .pv-values-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .pv-val-card {
+    background: var(--cream);
+    border-radius: 10px;
+    padding: 10px 12px;
+    border: 1px solid rgba(107,26,42,0.07);
+  }
+  .pv-val-label { font-size: 10px; color: var(--text-muted); margin-bottom: 3px; }
+  .pv-val-val { font-size: 13px; font-weight: 500; color: var(--text-mid); }
+
+  .pv-action-bar {
+    display: flex;
+    gap: 10px;
+    padding: 14px 20px;
+    background: var(--warm-white);
+    border-top: 1px solid rgba(107,26,42,0.08);
+  }
+  .pv-btn-save {
+    width: 46px; height: 46px;
+    border-radius: 13px;
+    border: 1.5px solid var(--cream-dark);
+    background: transparent;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .pv-btn-request {
+    flex: 1;
+    height: 46px;
+    border-radius: 13px;
+    border: none;
+    background: var(--maroon);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .pv-btn-request::before { content: '✦'; font-size: 10px; color: var(--gold-light); }
+
+  /* ── BOTTOM NAV ── */
+  .bottom-nav {
+    display: flex;
+    background: var(--warm-white);
+    border-top: 1px solid rgba(107,26,42,0.1);
+    padding: 10px 0 14px;
+  }
+  .bn-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    cursor: pointer;
+  }
+  .bn-icon {
+    width: 28px; height: 28px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    color: var(--text-light);
+  }
+  .bn-item.active .bn-icon {
+    background: rgba(107,26,42,0.08);
+    color: var(--maroon);
+  }
+  .bn-label {
+    font-size: 9px;
+    font-weight: 500;
+    color: var(--text-light);
+    letter-spacing: 0.03em;
+  }
+  .bn-item.active .bn-label { color: var(--maroon); }
+  .bn-pip {
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--crimson);
+    display: none;
+  }
+  .bn-item.has-notif .bn-pip { display: block; }
+
+  /* ── ANNOTATION CALLOUTS ── */
+  .annot-section {
+    width: 340px;
+    background: rgba(107,26,42,0.04);
+    border-radius: 16px;
+    padding: 16px;
+    border: 1px solid rgba(107,26,42,0.08);
+  }
+  .annot-title {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--maroon-deep);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .annot-title::before {
+    content: '';
+    width: 3px; height: 14px;
+    border-radius: 2px;
+    background: var(--gold);
+  }
+  .annot-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+    align-items: flex-start;
+  }
+  .annot-row:last-child { margin-bottom: 0; }
+  .annot-num {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: var(--maroon);
+    color: #fff;
+    font-size: 9px;
+    font-weight: 600;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .annot-text {
+    font-size: 12px;
+    color: var(--text-mid);
+    line-height: 1.5;
+  }
+  .annot-text strong { color: var(--maroon-deep); font-weight: 500; }
+
+  /* ── MICRO-INTERACTION LEGEND ── */
+  .micro-grid {
+    width: 340px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .micro-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 12px 14px;
+    border: 1px solid rgba(107,26,42,0.08);
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .micro-icon {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--maroon-deep), var(--maroon));
+    color: var(--gold-light);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .micro-text { flex: 1; }
+  .micro-name { font-size: 13px; font-weight: 500; color: var(--maroon-deep); margin-bottom: 2px; }
+  .micro-desc { font-size: 11px; color: var(--text-muted); line-height: 1.5; }
+
+  /* Interest animation */
+  .interest-chip { transition: all 0.18s cubic-bezier(0.34,1.56,0.64,1); }
+  .interest-chip.sel { transform: scale(1.02); }
+  .ob-cta:active { transform: scale(0.97); }
+</style>
+
+<div class="w-root">
+  <h2 class="sr-only">Thunai — Mobile UI/UX prototype showing three key screens: onboarding, discovery feed, and profile view</h2>
+
+  <div class="screen-tabs">
+    <button class="screen-tab active" onclick="showScreen('onboarding', this)">Onboarding</button>
+    <button class="screen-tab" onclick="showScreen('feed', this)">Discovery</button>
+    <button class="screen-tab" onclick="showScreen('profile', this)">Profile View</button>
+  </div>
+
+  <!-- ═══════════════════════════════════
+       SCREEN 1 — ONBOARDING
+  ═══════════════════════════════════ -->
+  <div class="phone-frame" id="screen-onboarding">
+    <div class="phone-status">
+      <span class="time">9:41</span>
+      <div class="icons"><span>●●●</span><span>WiFi</span><span>■</span></div>
+    </div>
+
+    <div class="ob-header">
+      <div class="ob-logo">Thunai
+        <span class="ob-logo-tamil">துணை · Companion</span>
+      </div>
+      <div class="ob-step-row">
+        <div class="ob-step-dot done"></div>
+        <div class="ob-step-dot done"></div>
+        <div class="ob-step-dot active"></div>
+        <div class="ob-step-dot"></div>
+        <div class="ob-step-dot"></div>
+        <span class="ob-step-label">Step 3 of 5</span>
+      </div>
+    </div>
+
+    <div class="ob-body">
+      <div class="ob-q">What moves your soul?</div>
+      <div class="ob-sub">Choose interests that truly reflect you — these shape who you'll discover.</div>
+
+      <div class="interest-grid" id="ob-grid">
+        <div class="interest-chip sel" onclick="toggleChip(this)">
+          <span class="ic-emoji">🎶</span>
+          <span class="ic-label">Carnatic Music</span>
+          <span class="ic-check"></span>
+        </div>
+        <div class="interest-chip" onclick="toggleChip(this)">
+          <span class="ic-emoji">📚</span>
+          <span class="ic-label">Tamil Literature</span>
+          <span class="ic-check"></span>
+        </div>
+        <div class="interest-chip sel" onclick="toggleChip(this)">
+          <span class="ic-emoji">🥘</span>
+          <span class="ic-label">Home Cooking</span>
+          <span class="ic-check"></span>
+        </div>
+        <div class="interest-chip" onclick="toggleChip(this)">
+          <span class="ic-emoji">🌍</span>
+          <span class="ic-label">World Travel</span>
+          <span class="ic-check"></span>
+        </div>
+        <div class="interest-chip sel" onclick="toggleChip(this)">
+          <span class="ic-emoji">🏔</span>
+          <span class="ic-label">Hiking & Nature</span>
+          <span class="ic-check"></span>
+        </div>
+        <div class="interest-chip" onclick="toggleChip(this)">
+          <span class="ic-emoji">💻</span>
+          <span class="ic-label">Tech & Design</span>
+          <span class="ic-check"></span>
+        </div>
+        <div class="interest-chip" onclick="toggleChip(this)">
+          <span class="ic-emoji">🎭</span>
+          <span class="ic-label">Bharatanatyam</span>
+          <span class="ic-check"></span>
+        </div>
+        <div class="interest-chip sel" onclick="toggleChip(this)">
+          <span class="ic-emoji">🌿</span>
+          <span class="ic-label">Diaspora Identity</span>
+          <span class="ic-check"></span>
+        </div>
+        <div class="interest-chip" onclick="toggleChip(this)">
+          <span class="ic-emoji">🎬</span>
+          <span class="ic-label">Tamil Cinema</span>
+          <span class="ic-check"></span>
+        </div>
+        <div class="interest-chip" onclick="toggleChip(this)">
+          <span class="ic-emoji">🧘</span>
+          <span class="ic-label">Wellness & Yoga</span>
+          <span class="ic-check"></span>
+        </div>
+      </div>
+
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px;">
+        <span style="font-size:12px; color:var(--text-muted);">4 selected · choose at least 3</span>
+        <span style="font-size:12px; color:var(--gold); font-weight:500; cursor:pointer;">+ Add custom</span>
+      </div>
+
+      <button class="ob-cta ob-cta-gold" style="margin-bottom:10px;">Continue</button>
+      <div style="text-align:center; font-size:11px; color:var(--text-light); cursor:pointer;">Skip this step</div>
+    </div>
+
+    <div class="bottom-nav">
+      <div class="bn-item">
+        <div class="bn-icon">🔍</div>
+        <span class="bn-label">Discover</span>
+      </div>
+      <div class="bn-item active">
+        <div class="bn-icon">✦</div>
+        <span class="bn-label">Setup</span>
+      </div>
+      <div class="bn-item">
+        <div class="bn-icon">💬</div>
+        <span class="bn-label">Messages</span>
+        <div class="bn-pip"></div>
+      </div>
+      <div class="bn-item">
+        <div class="bn-icon">👤</div>
+        <span class="bn-label">Profile</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="annot-section">
+    <div class="annot-title">Onboarding — Design Notes</div>
+    <div class="annot-row"><div class="annot-num">1</div><div class="annot-text"><strong>Progressive header:</strong> Maroon-to-crimson gradient with gold logo. Step dots animate from pale → gold (done) → white + wider (active).</div></div>
+    <div class="annot-row"><div class="annot-num">2</div><div class="annot-text"><strong>Interest chips:</strong> 2-col grid, spring-bounce animation on select (scale 1.02 + border shift). Haptic feedback on mobile.</div></div>
+    <div class="annot-row"><div class="annot-num">3</div><div class="annot-text"><strong>Gold CTA:</strong> Replaced with a gold gradient for this final-action step — signals completion, premium feel.</div></div>
+    <div class="annot-row"><div class="annot-num">4</div><div class="annot-text"><strong>Live count:</strong> "4 selected" updates in real-time. CTA stays gold only when ≥3 interests are chosen.</div></div>
+  </div>
+
+  <!-- ═══════════════════════════════════
+       SCREEN 2 — DISCOVERY FEED
+  ═══════════════════════════════════ -->
+  <div class="phone-frame" id="screen-feed" style="display:none;">
+    <div class="phone-status">
+      <span class="time">9:41</span>
+      <div class="icons"><span>●●●</span><span>WiFi</span><span>■</span></div>
+    </div>
+
+    <div class="feed-header">
+      <div class="feed-logo-sm">Thunai <span>துணை</span></div>
+      <div class="feed-icons">
+        <div class="feed-icon-btn notif" aria-label="Notifications"><i class="ti ti-bell" aria-hidden="true"></i></div>
+        <div class="feed-icon-btn" aria-label="Filter"><i class="ti ti-adjustments-horizontal" aria-hidden="true"></i></div>
+      </div>
+    </div>
+
+    <div class="feed-filter-row">
+      <span class="f-chip active">✦ Shared Interests</span>
+      <span class="f-chip">Near Me</span>
+      <span class="f-chip">New Profiles</span>
+      <span class="f-chip">Values Match</span>
+      <span class="f-chip">Diaspora</span>
+    </div>
+
+    <div class="feed-scroll">
+
+      <!-- CARD 1 -->
+      <div class="profile-card">
+        <div class="pc-img-wrap">
+          <div class="pc-avatar">🌸</div>
+          <div class="pc-verified"><div class="pc-verified-dot"></div>Verified</div>
+          <div class="pc-location-badge">📍 Melbourne, AU</div>
+          <button class="pc-like-btn" aria-label="Like">🤍</button>
+        </div>
+        <div class="pc-body">
+          <div class="pc-name-row">
+            <span class="pc-name">Kavitha</span>
+            <span class="pc-age">27 yrs</span>
+          </div>
+          <div class="pc-meta">
+            <span>Physiotherapist</span>
+            <span class="pc-meta-dot">·</span>
+            <span>Jaffna roots</span>
+          </div>
+          <div class="shared-block">
+            <div class="shared-title"><span>✦</span> You both love</div>
+            <div class="shared-tags">
+              <span class="shared-tag">🎶 Ilaiyaraaja</span>
+              <span class="shared-tag">🏔 Hiking</span>
+              <span class="shared-tag">🌿 Diaspora identity</span>
+            </div>
+          </div>
+          <div class="pc-actions">
+            <button class="pc-btn-pass">Pass</button>
+            <button class="pc-btn-connect">Send Request ✦</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD 2 -->
+      <div class="profile-card">
+        <div class="pc-img-wrap" style="background: linear-gradient(135deg, #E8D5D0 0%, #D4BFB5 100%);">
+          <div class="pc-avatar">🌿</div>
+          <div class="pc-verified"><div class="pc-verified-dot"></div>ID Verified</div>
+          <div class="pc-location-badge">📍 London, UK</div>
+          <button class="pc-like-btn" aria-label="Like">❤️</button>
+        </div>
+        <div class="pc-body">
+          <div class="pc-name-row">
+            <span class="pc-name">Anushya</span>
+            <span class="pc-age">29 yrs</span>
+          </div>
+          <div class="pc-meta">
+            <span>UX Designer</span>
+            <span class="pc-meta-dot">·</span>
+            <span>Colombo roots</span>
+          </div>
+          <div class="shared-block">
+            <div class="shared-title"><span>✦</span> You both love</div>
+            <div class="shared-tags">
+              <span class="shared-tag">🥘 Home Cooking</span>
+              <span class="shared-tag">💻 Tech & Design</span>
+            </div>
+          </div>
+          <div class="pc-actions">
+            <button class="pc-btn-pass">Pass</button>
+            <button class="pc-btn-connect">Send Request ✦</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="bottom-nav">
+      <div class="bn-item active">
+        <div class="bn-icon"><i class="ti ti-compass" aria-hidden="true"></i></div>
+        <span class="bn-label">Discover</span>
+      </div>
+      <div class="bn-item has-notif">
+        <div class="bn-icon"><i class="ti ti-heart" aria-hidden="true"></i></div>
+        <span class="bn-label">Matches</span>
+        <div class="bn-pip"></div>
+      </div>
+      <div class="bn-item">
+        <div class="bn-icon"><i class="ti ti-message" aria-hidden="true"></i></div>
+        <span class="bn-label">Messages</span>
+      </div>
+      <div class="bn-item">
+        <div class="bn-icon"><i class="ti ti-user" aria-hidden="true"></i></div>
+        <span class="bn-label">Profile</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="annot-section" id="annot-feed" style="display:none;">
+    <div class="annot-title">Discovery Feed — Design Notes</div>
+    <div class="annot-row"><div class="annot-num">1</div><div class="annot-text"><strong>Shared interests block:</strong> Gold-tinted card prominently surfaces what you have in common — the core differentiator from transactional directories.</div></div>
+    <div class="annot-row"><div class="annot-num">2</div><div class="annot-text"><strong>Filter chips:</strong> Horizontally scrollable. "Shared Interests" is the default sort — reinforces the product philosophy.</div></div>
+    <div class="annot-row"><div class="annot-num">3</div><div class="annot-text"><strong>Verified badge:</strong> Teal colour signals trustworthiness. Two tiers: "Verified" (photo check) and "ID Verified" (document check).</div></div>
+    <div class="annot-row"><div class="annot-num">4</div><div class="annot-text"><strong>Swipe gestures:</strong> Right swipe → "Connect", Left swipe → "Pass". Card springs back with bounce easing on partial swipe. Stack peek of next card visible behind.</div></div>
+  </div>
+
+  <!-- ═══════════════════════════════════
+       SCREEN 3 — PROFILE VIEW
+  ═══════════════════════════════════ -->
+  <div class="phone-frame" id="screen-profile" style="display:none;">
+    <div class="phone-status">
+      <span class="time">9:41</span>
+      <div class="icons"><span>●●●</span><span>WiFi</span><span>■</span></div>
+    </div>
+
+    <div class="pv-hero">
+      <div class="pv-avatar">🌸</div>
+      <button class="pv-back" aria-label="Go back">←</button>
+      <button class="pv-more" aria-label="More options">⋯</button>
+      <div class="pv-verified-strip">
+        <div class="pv-ver-badge"><div class="pv-ver-dot"></div>ID Verified · Photo Verified</div>
+      </div>
+    </div>
+
+    <div style="overflow-y:auto; max-height:430px;">
+      <div class="pv-body">
+        <div class="pv-name-block">
+          <div>
+            <div class="pv-name">Kavitha R.</div>
+            <span class="pv-tamil-name">கவிதா</span>
+            <div class="pv-age-loc">27 · Melbourne, Australia</div>
+          </div>
+          <div class="pv-compat-ring" title="78% compatibility">
+            <div class="pv-compat-inner">78%<span class="pv-compat-label">match</span></div>
+          </div>
+        </div>
+
+        <div class="pv-section">
+          <div class="pv-section-title">Shared with you</div>
+          <div class="pv-tags">
+            <span class="pv-tag shared">🎶 Ilaiyaraaja</span>
+            <span class="pv-tag shared">🏔 Hiking</span>
+            <span class="pv-tag shared">🌿 Diaspora Identity</span>
+          </div>
+        </div>
+
+        <div class="pv-section">
+          <div class="pv-section-title">Interests & Passions</div>
+          <div class="pv-tags">
+            <span class="pv-tag shared">🎶 Ilaiyaraaja</span>
+            <span class="pv-tag shared">🏔 Hiking</span>
+            <span class="pv-tag shared">🌿 Diaspora Identity</span>
+            <span class="pv-tag">🥘 Home Cooking</span>
+            <span class="pv-tag">📚 Tamil Literature</span>
+            <span class="pv-tag">🎭 Classical Dance</span>
+            <span class="pv-tag">🌱 Sustainability</span>
+          </div>
+        </div>
+
+        <div class="pv-section">
+          <div class="pv-section-title">Core Values & Life Goals</div>
+          <div class="pv-values-grid">
+            <div class="pv-val-card">
+              <div class="pv-val-label">Family orientation</div>
+              <div class="pv-val-val">Very family-led</div>
+            </div>
+            <div class="pv-val-card">
+              <div class="pv-val-label">Cultural roots</div>
+              <div class="pv-val-val">Strongly connected</div>
+            </div>
+            <div class="pv-val-card">
+              <div class="pv-val-label">Settling goal</div>
+              <div class="pv-val-val">Open to relocating</div>
+            </div>
+            <div class="pv-val-card">
+              <div class="pv-val-label">Religion</div>
+              <div class="pv-val-val">Hindu · flexible</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pv-section">
+          <div class="pv-section-title">About Kavitha</div>
+          <div style="font-size:13px; color:var(--text-mid); line-height:1.7;">
+            Physio by day, trail runner on weekends. Grew up between Jaffna and Melbourne — both identities feel like home. I believe conversations over coffee matter more than a checklist.
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="pv-action-bar">
+      <button class="pv-btn-save" aria-label="Save profile">🔖</button>
+      <button class="pv-btn-request">Send Connection Request</button>
+    </div>
+  </div>
+
+  <div class="annot-section" id="annot-profile" style="display:none;">
+    <div class="annot-title">Profile View — Design Notes</div>
+    <div class="annot-row"><div class="annot-num">1</div><div class="annot-text"><strong>Compatibility ring:</strong> Conic-gradient arc showing match % — only visible with 3+ shared interests. Avoids gamification feel.</div></div>
+    <div class="annot-row"><div class="annot-num">2</div><div class="annot-text"><strong>Tamil script name:</strong> Shown in Noto Sans Tamil in gold, signals cultural respect without forcing it on every screen.</div></div>
+    <div class="annot-row"><div class="annot-num">3</div><div class="annot-text"><strong>Shared tags highlighted:</strong> Gold-tinted with ✦ prefix — visually distinct from other interests, reinforcing what connects you.</div></div>
+    <div class="annot-row"><div class="annot-num">4</div><div class="annot-text"><strong>Sticky action bar:</strong> Fixed at bottom of scroll area, always accessible. Bookmark icon for low-commitment save; maroon CTA for request.</div></div>
+  </div>
+
+  <!-- ── MICRO-INTERACTIONS LEGEND ── -->
+  <div class="section-label" style="margin-top:0.5rem;">Micro-interaction Specification</div>
+  <div class="micro-grid">
+    <div class="micro-card">
+      <div class="micro-icon">↔</div>
+      <div class="micro-text">
+        <div class="micro-name">Card swipe gesture</div>
+        <div class="micro-desc">Drag triggers rotate + translate. Right tints gold (connect), left tints cool grey (pass). Release threshold at 40% — springs back with cubic-bezier(0.34, 1.56, 0.64, 1) if under threshold.</div>
+      </div>
+    </div>
+    <div class="micro-card">
+      <div class="micro-icon">✦</div>
+      <div class="micro-text">
+        <div class="micro-name">Interest chip selection</div>
+        <div class="micro-desc">Scale spring (1 → 1.04 → 1.02) + check mark fade-in. 4ms haptic pulse on mobile. Deselect reverses with 150ms ease-out.</div>
+      </div>
+    </div>
+    <div class="micro-card">
+      <div class="micro-icon">↑</div>
+      <div class="micro-text">
+        <div class="micro-name">Feed scroll reveal</div>
+        <div class="micro-desc">Cards enter with translateY(24px) → 0 + opacity 0→1 staggered 80ms apart. Intersection Observer triggers — only animates cards entering viewport.</div>
+      </div>
+    </div>
+    <div class="micro-card">
+      <div class="micro-icon">❤</div>
+      <div class="micro-text">
+        <div class="micro-name">Like / heart tap</div>
+        <div class="micro-desc">Heart icon pulses to 1.4× scale with crimson fill, then settles to 1.1× with a brief gold particle burst (3 dots, CSS keyframes). Button stays filled to confirm state.</div>
+      </div>
+    </div>
+    <div class="micro-card">
+      <div class="micro-icon">→</div>
+      <div class="micro-text">
+        <div class="micro-name">Onboarding step transition</div>
+        <div class="micro-desc">Full-screen slide-left (translateX 0→−100%) on Continue, step dot animates simultaneously. Gold CTA pulses once on landing to draw attention.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function showScreen(id, btn) {
+  ['onboarding','feed','profile'].forEach(s => {
+    document.getElementById('screen-' + s).style.display = 'none';
+  });
+  ['annot-feed','annot-profile'].forEach(a => {
+    const el = document.getElementById(a);
+    if(el) el.style.display = 'none';
+  });
+  document.getElementById('screen-' + id).style.display = '';
+  if(id === 'feed') document.getElementById('annot-feed').style.display = '';
+  if(id === 'profile') document.getElementById('annot-profile').style.display = '';
+  document.querySelectorAll('.screen-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function toggleChip(el) {
+  el.classList.toggle('sel');
+  const grid = document.getElementById('ob-grid');
+  const count = grid.querySelectorAll('.sel').length;
+  const cta = document.querySelector('.ob-cta');
+  const label = document.querySelector('.ob-body [style*="font-size:12px"]');
+  if(label) label.textContent = count + ' selected · choose at least 3';
+}
+</script>
