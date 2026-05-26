@@ -1,5 +1,8 @@
 FROM node:20-alpine AS builder
 
+# Install OpenSSL for native Prisma engine binaries on Alpine
+RUN apk add --no-cache openssl
+
 WORKDIR /usr/src/app
 
 COPY package*.json ./
@@ -21,6 +24,9 @@ RUN npm prune --production
 
 # --- PRODUCTION STAGE ---
 FROM node:20-alpine
+
+# Install OpenSSL for native Prisma engine binaries in production
+RUN apk add --no-cache openssl
 
 WORKDIR /usr/src/app
 
