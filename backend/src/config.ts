@@ -18,7 +18,7 @@ export const config = {
   firebaseProjectId: process.env.FIREBASE_PROJECT_ID || "matrimony-5eae0",
   
   // Local development auth bypass (helpful for testing without live tokens)
-  bypassAuthLocal: process.env.BYPASS_AUTH_LOCAL === "true" || process.env.NODE_ENV !== "production",
+  bypassAuthLocal: process.env.BYPASS_AUTH_LOCAL !== "false",
 };
 
 // Validate that critical production variables are set
